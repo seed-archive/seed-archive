@@ -19,13 +19,17 @@ Gathered on 2026-11-15 for a decision the owner will make later. Nothing below h
   portal, so the portal forwards `/<id>/*` to the game's project (`lib/games.ts` → `analytics`, `next.config.ts`).
   Views of the first minutes after the release of 2026-11-14 were lost before that forwarding existed.
 
-## Done on 2026-11-15: one counter now
+## Done on 2026-11-15: one counter now, in the portal's project
 
-The owner asked for one statistics at once. The portal's `<Analytics>` sends to the No Man's Sky project's path
-(`scriptSrc="/a1110995d7968c05/script.js"`, `endpoint="/a1110995d7968c05"`, from `lib/games.ts`), which the portal
-forwards to that project. So the portal's and the game's views land in one report, the Vercel project `atlas-archive`
-(its history kept); a new game's app points at the same path. Checked in a browser: the portal's page loads the script
-and posts `/a1110995d7968c05/view` → 200. Still Hobby: views only, no clicks. The choice below (Pro or GA4) is open.
+The owner asked for one statistics at once, aimed at a portal and two games from the start. Web Analytics is on in
+the **portal's** Vercel project (`seed-archive`, Hobby); its path at the domain's root is `/933b9afd1a52216d/`
+(`script.js`, `view`). The portal's `<Analytics />` uses it as is; every game's app sends there too with
+`<Analytics scriptSrc="/933b9afd1a52216d/script.js" endpoint="/933b9afd1a52216d" />`. One report shows the portal and
+every game; sections by path. Still Hobby: views only, no clicks.
+
+The switch: for a few minutes the portal sent to the No Man's Sky project's path `/a1110995d7968c05/`, which the
+portal forwards there. Once the No Man's Sky site sends to the portal's path, Web Analytics is turned off in the
+`atlas-archive` project and that forwarding (`analytics` in `lib/games.ts`) is removed — one source of numbers only.
 
 ## Option A — Vercel Web Analytics, one project for the domain
 
