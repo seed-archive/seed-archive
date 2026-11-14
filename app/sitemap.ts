@@ -1,0 +1,15 @@
+import type { MetadataRoute } from "next";
+
+// The portal's own pages; each game's section has its own sitemap.
+export default function sitemap(): MetadataRoute.Sitemap {
+  const base = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+
+  return [
+    {
+      url: base,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 1,
+    },
+  ];
+}
