@@ -306,4 +306,7 @@ game. The menus differ because the games do.
   deferred question, and moving the migrations to the portal.
 - **D. The legal pages** move to the portal (D12), after the release; the portal gets the shared sign-in (D13).
 - **The name and the header** (D15): done with the release; the portal's header is the same.
+- **F. Monitoring — done 2026-11-15**: one Sentry project per app (portal `seed-archive`, No Man's Sky
+  `no-mans-sky-site`), one Vercel Analytics counter for the domain in the portal's project; the recipe for a new
+  game in `docs/monitoring.md`.
 - **E. Themes** (D14): light, dark, the system's by default, one switch for the portal and every game; after D.
