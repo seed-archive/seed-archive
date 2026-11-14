@@ -2,6 +2,10 @@ import type { NextConfig } from "next";
 
 import { GAMES } from "./lib/games";
 
+// The portal's own production alias and its Vercel Analytics path.
+const PORTAL = "https://seed-archive-theta.vercel.app";
+const PORTAL_ANALYTICS = "933b9afd1a52216d";
+
 const nextConfig: NextConfig = {
   async rewrites() {
     return {
@@ -21,10 +25,13 @@ const nextConfig: NextConfig = {
           source: `/${game.slug}/:path+`,
           destination: `${game.zone}/${game.slug}/:path+`,
         },
-        // The game's Vercel Analytics (script and events), see lib/games.ts.
+        // A game's old Vercel Analytics path (see lib/games.ts): Vercel
+        // still writes it into the game's build, so the game's views arrive
+        // here; they go to the portal's own counter, the one count for the
+        // domain (docs/analytics.md), through the portal's production alias.
         {
           source: `/${game.analytics}/:path*`,
-          destination: `${game.zone}/${game.analytics}/:path*`,
+          destination: `${PORTAL}/${PORTAL_ANALYTICS}/:path*`,
         },
       ]),
       // Any other path the portal has no page for: the old links of No Man's
