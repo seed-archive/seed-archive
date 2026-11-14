@@ -12,7 +12,7 @@ Gathered on 2026-11-15 for a decision the owner will make later. Nothing below h
 
 ## How it stands today
 
-- Each Vercel project has its own Web Analytics: the No Man's Sky project (`atlas-archive`) is on and counts; the
+- Each Vercel project has its own Web Analytics: the No Man's Sky project (`no-mans-sky-site`, was `atlas-archive`) was on and counted; the
   portal's project (`seed-archive`) has Web Analytics **off**, so it counts nothing.
 - Vercel Analytics loads its script and sends its events by a path at the deployment's root, unique per project:
   `/<id>/script.js`, `/<id>/view`. The No Man's Sky id is `a1110995d7968c05`. On the shared domain that root is the
@@ -29,7 +29,12 @@ every game; sections by path. Still Hobby: views only, no clicks.
 
 The switch: for a few minutes the portal sent to the No Man's Sky project's path `/a1110995d7968c05/`, which the
 portal forwards there. Once the No Man's Sky site sends to the portal's path, Web Analytics is turned off in the
-`atlas-archive` project and that forwarding (`analytics` in `lib/games.ts`) is removed — one source of numbers only.
+No Man's Sky project and that forwarding (`analytics` in `lib/games.ts`) is removed — one source of numbers only.
+
+Status 2026-11-15: Web Analytics is off in the No Man's Sky project. Vercel still writes that project's own endpoints
+into its build (`NEXT_PUBLIC_VERCEL_OBSERVABILITY_CLIENT_CONFIG`), which override `endpoint`; so the game's app gives
+`viewEndpoint`, `eventEndpoint` and `sessionEndpoint` explicitly. Until that release, the portal forwards the old path
+to its own counter (`next.config.ts`).
 
 ## Option A — Vercel Web Analytics, one project for the domain
 

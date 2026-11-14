@@ -29,7 +29,7 @@ export const GAMES: Game[] = [
       "Multi-tools, ships and creatures: which systems hold the best ones, and why.",
     zone:
       process.env.NO_MANS_SKY_ZONE ??
-      "https://atlas-archive-ethberrys-projects.vercel.app",
+      "https://no-mans-sky-site-ethberrys-projects.vercel.app",
     cover: "/no-mans-sky/assets/img/galaxies/0.jpg",
     analytics: "a1110995d7968c05",
     owner: "Hello Games",

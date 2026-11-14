@@ -297,8 +297,9 @@ game. The menus differ because the games do.
 - **A. The release with the domain — done 2026-11-14.** `seedarchive.gg` on the portal, the No Man's Sky site under
   `/no-mans-sky`, `www` → apex, the old host → `seedarchive.gg` (308, `LEGACY_HOST_REDIRECT`), Google sign-in origin
   added, Search Console domain property verified and Change of address done.
-- **B. The renames — the site done 2026-11-15:** `atlas-archive` → `no-mans-sky-site` on GitHub and on disk. The
-  Vercel project keeps the name `atlas-archive`: its old address must keep redirecting. The generator's repository →
+- **B. The renames — the site done 2026-11-15:** `atlas-archive` → `no-mans-sky-site` on GitHub, on disk, and as the
+  Vercel project (its alias `no-mans-sky-site-ethberrys-projects.vercel.app`, which the portal forwards to); the old
+  domain `atlas-archive-tau.vercel.app` stays attached to it and keeps redirecting to seedarchive.gg. The generator's repository →
   `no-mans-sky` is the game's session's.
 - **C. The portal.** Built early, on the owner's word, so the domain's root shows a page and not a redirect: the
   Vercel project `seed-archive` holds `seedarchive.gg` from the switch on. Still waiting for a second game: D3's
