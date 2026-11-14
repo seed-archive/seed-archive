@@ -10,7 +10,7 @@ first and say why.
 The No Man's Sky generator computes, from a galactic address, what the game will place there — stars, planets,
 buildings, ships, multi-tools, creatures — and checks it against hundreds of recordings made in the game. Atlas Archive
 was the site that published its results, at `atlas-archive-tau.vercel.app`, from the repository
-`seed-archive/atlas-archive`.
+`seed-archive/atlas-archive` (now `seed-archive/no-mans-sky-site`).
 
 In November 2026 the owner looked for a second game to take apart, and Valheim was chosen. The site therefore had to
 become a home for several games, and on 2026-11-14 it became **Seed Archive**, at `seedarchive.gg`.
@@ -294,15 +294,15 @@ game. The menus differ because the games do.
 
 ## State on 2026-11-14 and the order of the move
 
-- **A. The release with the domain.** Zone `seedarchive.gg` active; records to Vercel in place; the branch
-  `wip-seedarchive-domain` of the site rebased on `dev` and building clean; waiting for the game's data, then
-  the release `dev` → `main` and the switch. The owner adds `https://seedarchive.gg` to the Google sign-in origins.
-- **B. The renames.** the generator's repository → `no-mans-sky` (the game's session), `atlas-archive` → `no-mans-sky-site` (the
-  coordinator, then the signal "folder renamed" to the game's session). The Vercel project keeps its name: its old
-  address must keep redirecting.
+- **A. The release with the domain — done 2026-11-14.** `seedarchive.gg` on the portal, the No Man's Sky site under
+  `/no-mans-sky`, `www` → apex, the old host → `seedarchive.gg` (308, `LEGACY_HOST_REDIRECT`), Google sign-in origin
+  added, Search Console domain property verified and Change of address done.
+- **B. The renames — the site done 2026-11-15:** `atlas-archive` → `no-mans-sky-site` on GitHub and on disk. The
+  Vercel project keeps the name `atlas-archive`: its old address must keep redirecting. The generator's repository →
+  `no-mans-sky` is the game's session's.
 - **C. The portal.** Built early, on the owner's word, so the domain's root shows a page and not a redirect: the
   Vercel project `seed-archive` holds `seedarchive.gg` from the switch on. Still waiting for a second game: D3's
   deferred question, and moving the migrations to the portal.
 - **D. The legal pages** move to the portal (D12), after the release; the portal gets the shared sign-in (D13).
-- **The name and the header** (D15): "Atlas Archive" leaves every page with the release.
+- **The name and the header** (D15): done with the release; the portal's header is the same.
 - **E. Themes** (D14): light, dark, the system's by default, one switch for the portal and every game; after D.
