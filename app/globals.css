@@ -1,23 +1,13 @@
 :root {
+  /* The No Man's Sky site's colours: Material UI's default light theme. The
+     archive has one tone until it has its own light and dark themes. */
   --bg: #ffffff;
-  --text: #1a1a1a;
-  --muted: #5f5f66;
-  --line: #e4e4e8;
+  --text: rgba(0, 0, 0, 0.87);
+  --muted: rgba(0, 0, 0, 0.6);
+  --line: rgba(0, 0, 0, 0.12);
   --card: #ffffff;
-  --accent: #1565c0;
+  --accent: #1976d2;
   color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #101114;
-    --text: #ececef;
-    --muted: #a3a3ad;
-    --line: #2a2b31;
-    --card: #17181c;
-    --accent: #7fb2ff;
-    color-scheme: dark;
-  }
 }
 
 * {
@@ -32,11 +22,38 @@ body {
   line-height: 1.6;
 }
 
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.brand {
+  color: inherit;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.0075em;
+}
+
+@media (max-width: 599px) {
+  .bar {
+    min-height: 56px;
+    padding: 0 16px;
+  }
+}
+
 .page {
   max-width: 960px;
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
   margin: 0 auto;
-  padding: 72px 24px 40px;
+  padding: 56px 24px 40px;
   display: flex;
   flex-direction: column;
 }

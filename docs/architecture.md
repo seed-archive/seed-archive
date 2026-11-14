@@ -185,6 +185,113 @@ One coordinating session and one session per game.
 The game's slug is the same everywhere: the path `/<slug>/`, the `basePath`, the schema (short form allowed: `nms`), the
 folder and repository names (`<slug>`, `<slug>-site`).
 
+## D12. Legal pages belong to the portal; each footer speaks for its own site
+
+**Chosen.** The owner, 2026-11-14:
+- **Privacy policy and terms of service are global**: they belong to Seed Archive as a whole, live in the portal, and
+  keep their old addresses without a game's prefix — `seedarchive.gg/privacy`, `seedarchive.gg/terms`.
+- **"How it works" (`/about`) stays with the game**: it explains that game's generator and data, so it remains
+  `seedarchive.gg/no-mans-sky/about`.
+- **Two kinds of footer.** The portal's footer, on the root page, shows the global pages (privacy, terms) and whatever
+  else concerns the whole archive. Each game's footer is about that game — its sections, its "How it works" — and
+  links to the global privacy and terms on the portal.
+
+**Why.** The legal pages describe the site and its owner, not one game: with a second game they would otherwise exist
+twice and drift apart. Their old addresses carried no prefix, and a legal page is linked from outside (sign-in
+consent, app stores, search), so it keeps the address it had.
+
+**The work it needs** (not done yet):
+1. The portal gets `app/privacy` and `app/terms`, moved from the No Man's Sky site. The texts may change: they now speak
+   for Seed Archive, not for one game's site — the owner decides the wording.
+2. The portal's catch-all redirect (`next.config.ts`) must exclude `/privacy` and `/terms`, which the portal now
+   answers itself; today it sends them to `/no-mans-sky/privacy`.
+3. The No Man's Sky site removes its own `app/privacy` and `app/terms`, redirects `/no-mans-sky/privacy` and
+   `/no-mans-sky/terms` to `/privacy` and `/terms` with `basePath: false`, and its footer
+   (`components/archive/ArchiveShell.tsx`) links to them as plain `<a href="/privacy">` — a link into another zone
+   is a full page load, and `next/link` would add the game's prefix.
+4. The old host's redirect (`LEGACY_HOST_REDIRECT`) must send `/privacy` and `/terms` to `seedarchive.gg/privacy` and
+   `seedarchive.gg/terms`, not into the game's section.
+5. The portal's footer drops its temporary links into `/no-mans-sky/about`, `/no-mans-sky/privacy` and
+   `/no-mans-sky/terms`, and links to its own privacy and terms.
+6. Google's consent screen (Google Cloud → Google Auth Platform → Branding) holds the home page, privacy and terms
+   links of the old host, `atlas-archive-tau.vercel.app`. The domain changes, not the paths: the owner points them at
+   `seedarchive.gg`, `seedarchive.gg/privacy` and `seedarchive.gg/terms`, and adds `seedarchive.gg` to the
+   authorised domains. The sign-in itself is the whole archive's (D13), not one game's.
+
+Items 1, 2, 4 and 5 are the coordinator's (the portal and the redirects); item 3 is the No Man's Sky session's (its
+site); item 6 is the owner's.
+
+## D13. Sign-in belongs to the whole archive
+
+**Chosen.** The owner, 2026-11-14: one sign-in at the top level of `seedarchive.gg`. The portal and every game's site
+support it, and a visitor signed in on one page is signed in everywhere.
+
+**How it already holds.** The No Man's Sky site signs in with Google's button (Google Identity Services) and hands the
+token to Supabase (`signInWithIdToken`); `@supabase/ssr` keeps the session in cookies on the path `/`. Google checks
+only the page's origin, and on one domain every zone has the same origin `https://seedarchive.gg` and the same cookies.
+So the sign-in is not tied to `/no-mans-sky`: the one origin in Google is enough for every game, and a new game adds
+nothing in Google.
+
+**The work it needs** (not done yet):
+1. The owner adds `https://seedarchive.gg` to the authorised JavaScript origins of the Google client (before
+   `LEGACY_HOST_REDIRECT` is turned on), and the consent links of D12 item 6.
+2. The portal gets the sign-in too: the provider and the button move from the No Man's Sky site into code every app
+   uses (the shared package of D3's costs), so the portal's header and every game's header show the same account.
+3. Every zone uses the same Supabase project and the same Google client id in its environment variables (the
+   coordinator's, on Vercel).
+
+## D14. Light and dark themes, one choice for the whole archive
+
+**Chosen.** The owner, 2026-11-14: proper light and dark themes, a switch between them, and by default the theme of the
+visitor's operating system. It works the same on the portal and on every game's site: a choice made on one page holds
+on every other.
+
+**Until then** every app is light only, with the colours of the No Man's Sky site (Material UI's default light theme);
+the portal follows them in `app/globals.css`.
+
+**How.** Three modes: system (the default), light, dark.
+- **One stored choice.** Material UI keeps the mode in `localStorage` under its key (`mui-mode`) and puts a class on
+  `<html>` before the page draws (`InitColorSchemeScript`, `colorSchemeSelector: "class"` — both already in the No
+  Man's Sky site). Every zone serves the same origin `https://seedarchive.gg`, so every zone reads the same
+  `localStorage`: the choice carries across zones with no cookie and no server. Locally the zones run on different
+  ports and do not share it; that is expected.
+- **The same class everywhere.** An app without Material UI (the portal today) reads the same key with a small script
+  in `<head>` and sets the same class, and its CSS tokens are defined per class. Once the shared package of D3 exists,
+  the theme (palette, the script, the switch) lives there.
+- **The switch** sits in every header, the same control in every app.
+
+**The work it needs** (not done yet; the No Man's Sky part is that session's):
+1. The palette of both themes, decided once, in the shared theme.
+2. The No Man's Sky site: `colorSchemes: { light, dark }` in its theme, the switch in its header, and every colour
+   written by hand moved to theme tokens — the builder (`components/archive/builder/style.ts`, `ColourTiles`),
+   `ShipRender`, the grade colours of `AssetCard`, the like button, the charts' colours, and pictures that assume a
+   white page.
+3. The portal: dark tokens per class, the script in `<head>`, the switch.
+4. A check of every page in both themes before the release that turns dark on.
+
+## D15. One header for the whole archive; each game brings its own navigation
+
+**Chosen.** The owner, 2026-11-14: the header carries the archive's name, **Seed Archive**, and is the same on the portal
+and on every game's site. Each game keeps its own navigation inside it.
+
+**Its parts, left to right:**
+- **"Seed Archive"** — always a plain `<a href="/">` to the portal's root (another zone, so a full page load).
+- **The game's name** (on a game's site only) — the game's own home, `next/link` to its `/`.
+- **The game's navigation** — its own menu and drawer, as each game needs.
+- **The account** (D13) and, later, the theme switch (D14) — the same in every app.
+
+**Why.** A visitor reads one site, not several: the name and the account must not change when the path enters another
+game. The menus differ because the games do.
+
+**Until the shared package of D3 exists**, every app copies the same look: Material UI's `AppBar` with a bottom divider,
+`h6` for the name, 64 px high (56 on a phone). The portal follows it in plain CSS.
+
+**The work it needs:**
+1. The portal: the header with "Seed Archive" (the coordinator's; done in the portal).
+2. The No Man's Sky site: "Seed Archive" link and "No Man's Sky" in its header (`ArchiveBar`), and the name "Atlas
+   Archive" replaced in every title, `siteName`, the texts of `lib/i18n/` and the privacy and terms pages (that
+   session's). A visitor never reads the working name.
+
 ## State on 2026-11-14 and the order of the move
 
 - **A. The release with the domain.** Zone `seedarchive.gg` active; records to Vercel in place; the branch
@@ -193,5 +300,9 @@ folder and repository names (`<slug>`, `<slug>-site`).
 - **B. The renames.** the generator's repository → `no-mans-sky` (the game's session), `atlas-archive` → `no-mans-sky-site` (the
   coordinator, then the signal "folder renamed" to the game's session). The Vercel project keeps its name: its old
   address must keep redirecting.
-- **C. The portal**, when Valheim has a site. Then decide D3's deferred question, move the migrations to the portal,
-  and move the domain from the No Man's Sky project to the portal.
+- **C. The portal.** Built early, on the owner's word, so the domain's root shows a page and not a redirect: the
+  Vercel project `seed-archive` holds `seedarchive.gg` from the switch on. Still waiting for a second game: D3's
+  deferred question, and moving the migrations to the portal.
+- **D. The legal pages** move to the portal (D12), after the release; the portal gets the shared sign-in (D13).
+- **The name and the header** (D15): "Atlas Archive" leaves every page with the release.
+- **E. Themes** (D14): light, dark, the system's by default, one switch for the portal and every game; after D.
