@@ -12,6 +12,11 @@ export type Game = {
   zone: string;
   // A picture served by the zone itself, under its own section.
   cover: string;
+  // The path at the deployment's root where Vercel Analytics of the zone's
+  // project serves its script and takes its events (/<id>/script.js,
+  // /<id>/view). On the shared domain that root is the portal, so the portal
+  // forwards it to the zone, or the game's visits are lost.
+  analytics: string;
 };
 
 export const GAMES: Game[] = [
@@ -24,5 +29,6 @@ export const GAMES: Game[] = [
       process.env.NO_MANS_SKY_ZONE ??
       "https://atlas-archive-ethberrys-projects.vercel.app",
     cover: "/no-mans-sky/assets/img/galaxies/0.jpg",
+    analytics: "a1110995d7968c05",
   },
 ];
