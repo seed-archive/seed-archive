@@ -9,7 +9,7 @@ routing to each game's section — once a second game has a site. Until then it 
 
 | Repository | What |
 |---|---|
-| [`no-mans-sky-site`](https://github.com/seed-archive/atlas-archive) | the No Man's Sky section (being renamed from `atlas-archive`) |
+| [`no-mans-sky-site`](https://github.com/seed-archive/no-mans-sky-site) | the No Man's Sky section (was `atlas-archive`) |
 | `seed-archive` | this portal |
 
 [docs/architecture.md](docs/architecture.md) records every decision behind this layout: what was chosen, why, what was

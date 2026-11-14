@@ -1,3 +1,4 @@
+import { Footer } from "@/components/Footer";
 import { GAMES } from "@/lib/games";
 
 // The root of seedarchive.gg: what the archive is, and a door into each game.
@@ -31,11 +32,7 @@ export default function Home() {
         ))}
       </ul>
 
-      <footer className="footer">
-        <a href="/no-mans-sky/about">About</a>
-        <a href="/no-mans-sky/privacy">Privacy</a>
-        <a href="/no-mans-sky/terms">Terms</a>
-      </footer>
+      <Footer />
     </main>
   );
 }

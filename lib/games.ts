@@ -17,6 +17,8 @@ export type Game = {
   // /<id>/view). On the shared domain that root is the portal, so the portal
   // forwards it to the zone, or the game's visits are lost.
   analytics: string;
+  // Who owns the game, its names and images (the terms of service).
+  owner: string;
 };
 
 export const GAMES: Game[] = [
@@ -30,5 +32,6 @@ export const GAMES: Game[] = [
       "https://atlas-archive-ethberrys-projects.vercel.app",
     cover: "/no-mans-sky/assets/img/galaxies/0.jpg",
     analytics: "a1110995d7968c05",
+    owner: "Hello Games",
   },
 ];
