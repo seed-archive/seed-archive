@@ -19,6 +19,7 @@ game's app (Valheim next) does to join. Set up on 2026-11-15; the reasons for th
 |---|---|---|---|
 | Portal | `seed-archive` | `seed-archive` | the shared counter itself, `/933b9afd1a52216d/` |
 | No Man's Sky | `no-mans-sky-site` (was `atlas-archive`) | `no-mans-sky-site` (was `atlas-archive`) | sends to the shared counter; its own Web Analytics is off |
+| Valheim | `valheim-site` (created 2026-11-15) | not yet: made when the site goes live | will send to the shared counter |
 
 The Sentry organization `ethberry` is shared with Ethberry's own projects, and with them its free quota (5,000 errors
 a month, 1 user, 30 days). Moving Seed Archive's projects into an organization of its own (Sentry: project settings →
