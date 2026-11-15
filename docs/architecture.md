@@ -292,6 +292,37 @@ game. The menus differ because the games do.
    Archive" replaced in every title, `siteName`, the texts of `lib/i18n/` and the privacy and terms pages (that
    session's). A visitor never reads the working name.
 
+## D16. Release notes belong to the portal
+
+**Chosen.** The owner, 2026-11-15: the release notes are the whole archive's, at `seedarchive.gg/release-notes`, one
+list for every game and the portal, newest first.
+
+**Why.** Until now every release was No Man's Sky's, so its notes lived in its site at `/no-mans-sky/release-notes`.
+From now on the work moves between games: while Valheim is built, No Man's Sky's own list would stand still and read
+as a dead site. One list shows the archive alive whichever game moved last.
+
+**How it is kept.**
+- The notes are written by hand, as before: a release is a few lines of what a visitor can now do, not a generator's
+  output.
+- In the portal's repository, one Markdown file per section: `content/release-notes/<slug>.md` for a game,
+  `content/release-notes/seed-archive.md` for the portal and what concerns the whole archive. Each release is a
+  heading `## <day Month year>: version <n>` with its lines under it, as in the No Man's Sky site today.
+- The page reads every file and merges the releases by date, newest first; each heading carries the game's name
+  ("No Man's Sky 2.4"). A game keeps its own version numbers.
+- Links inside a note are full paths with the section's prefix (`/no-mans-sky/quests/farming`): every page of a game
+  is another zone for the portal.
+- **A game's session writes its own file in the portal**, and only that file: the one exception to the portal being the
+  coordinator's. It goes in with the game's release, and the coordinator merges it on the owner's word.
+
+**The work it needs:**
+1. The portal: `app/release-notes`, the files above with No Man's Sky's notes moved over (links prefixed), the
+   footer link, the sitemap, and the newest releases on the root page (the coordinator's).
+2. After the portal's page is live, the No Man's Sky site removes `app/release-notes` and its content, redirects
+   `/no-mans-sky/release-notes` to `/release-notes` with `basePath: false` (as the legal pages), takes it out of its
+   sitemap, and its menu links to it with a plain `<a href="/release-notes">` (that session's).
+3. The old host's redirect sends `/release-notes` to `seedarchive.gg/release-notes` in one hop (the coordinator's).
+4. From then on a game's release adds its lines to its file in the portal, not to its own site.
+
 ## State on 2026-11-14 and the order of the move
 
 - **A. The release with the domain — done 2026-11-14.** `seedarchive.gg` on the portal, the No Man's Sky site under
@@ -310,3 +341,18 @@ game. The menus differ because the games do.
   `no-mans-sky-site`), one Vercel Analytics counter for the domain in the portal's project; the recipe for a new
   game in `docs/monitoring.md`.
 - **E. Themes** (D14): light, dark, the system's by default, one switch for the portal and every game; after D.
+- **G. One icon for Seed Archive** (the owner, 2026-11-15). Today the portal and the No Man's Sky site both serve No
+  Man's Sky's `favicon.ico` and `apple-icon.png`. Make one icon of the archive itself and serve it from the portal and
+  from every game's app (`app/favicon.ico`, `app/apple-icon.png`, and the web manifest if one is added), so the tab
+  reads the same on every page of the domain.
+- **H. Our own event tracker** (the owner, 2026-11-15): count clicks on buttons ourselves instead of paying for
+  Vercel Pro or adding Google Analytics with a consent banner (`docs/analytics.md`). Few events, so it stays simple:
+  - one table of the whole archive in Supabase's `public` schema: event name, the page's path with its section's
+    prefix, the time; no user, no cookie, no IP stored — so no consent banner and nothing new for the privacy policy
+    beyond a line that clicks are counted anonymously;
+  - a small `track(name)` in the code every app shares (D3), writing through one insert-only function or route with a
+    rate limit; a game names its events by its slug (`no-mans-sky.interceptor-finder`);
+  - reading the counts by a query or a page in the portal; Vercel Analytics stays the counter of visits.
+  The first event is the button that measures whether to build an Interceptor finder.
+- **I. Release notes move to the portal** (D16, the owner, 2026-11-15): first the portal's page with No Man's Sky's
+  notes, then the No Man's Sky site's redirect and menu link.

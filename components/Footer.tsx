@@ -3,6 +3,7 @@
 export function Footer() {
   return (
     <footer className="footer">
+      <a href="/release-notes">Release notes</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
     </footer>

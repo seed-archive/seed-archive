@@ -78,6 +78,11 @@ to its own counter (`next.config.ts`).
   $55/month ($550/year) — unlimited, the only plan without their logo. All support Consent Mode v2. Against it: a
   third-party script on every page, the logo, a price that grows with traffic. Our own banner is one component.
 
+## Option C — our own event tracker (planned, item H of the state in docs/architecture.md)
+
+Views stay with the shared Vercel counter (free); clicks are counted by our own small table and `track()`, with no
+cookies and no personal data, so no banner and no paid plan. Chosen direction on 2026-11-15; not built yet.
+
 ## Not both
 
 The owner, 2026-11-15: two counters will never agree and time goes into finding the difference. One source of numbers
