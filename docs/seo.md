@@ -27,6 +27,10 @@ with a link to this one. The No Man's Sky section's is `docs/seo.md` of its site
   link to its section's home, then the game's own menu.
 - A game's footer speaks for its game (D12): its sections, guides, and tools. The legal pages and anything about the
   archive itself belong to the portal's footer.
+- **A full-screen tool keeps the header and drops the rest** (the owner, 2026-11-15; first Valheim's map): the page is
+  the tool across the whole window, with its controls over it, no breadcrumbs and no footer. The shared header stays,
+  and it is the only way out. Such a page still has its title, description and canonical address, is in the sitemap,
+  and is linked from at least two pages of its game; the footer's links stay on every other page.
 
 ## Links
 
@@ -69,7 +73,7 @@ with a link to this one. The No Man's Sky section's is `docs/seo.md` of its site
 
 ## Review before a release
 
-1. Read the served HTML, not the source: `curl -s localhost:3000/<slug>/<path>` shows what a crawler gets (the
+1. Read the served HTML, not the source: `curl -s localhost:5001/<slug>/<path>` shows what a crawler gets (the
    `<title>`, the `<h1>`, the links).
 2. No link or picture of the served HTML starts with a bare `/` outside `/<slug>/`, except the header's "Seed Archive"
    and the shared legal pages (`curl … | grep -oE '(href|src)="/[^"]*"'`).
