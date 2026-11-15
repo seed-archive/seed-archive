@@ -73,7 +73,7 @@ with a link to this one. The No Man's Sky section's is `docs/seo.md` of its site
 
 ## Review before a release
 
-1. Read the served HTML, not the source: `curl -s localhost:5001/<slug>/<path>` shows what a crawler gets (the
+1. Read the served HTML, not the source: `curl -s localhost:5010/<slug>/<path>` shows what a crawler gets (the
    `<title>`, the `<h1>`, the links).
 2. No link or picture of the served HTML starts with a bare `/` outside `/<slug>/`, except the header's "Seed Archive"
    and the shared legal pages (`curl … | grep -oE '(href|src)="/[^"]*"'`).
