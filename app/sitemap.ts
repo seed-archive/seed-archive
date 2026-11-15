@@ -11,6 +11,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      url: `${base}/release-notes`,
+      changeFrequency: "weekly",
+      priority: 0.5,
+    },
     ...["privacy", "terms"].map((page) => ({
       url: `${base}/${page}`,
       changeFrequency: "yearly" as const,
