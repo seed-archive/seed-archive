@@ -13,7 +13,7 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:5000",
+    process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:5001",
   ),
   title: "Seed Archive — where the best finds of game worlds are",
   description:
