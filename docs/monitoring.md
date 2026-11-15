@@ -10,6 +10,11 @@ game's app (Valheim next) does to join. Set up on 2026-11-15; the reasons for th
   code. Each game's session reads only its own project. Sentry's "All Projects" view still shows every app at once.
   Projects cost nothing: the plans have no limit on projects; the error quota and the users belong to the
   organization.
+- **Sentry runs on the production deploy only** (the owner, 2026-11-15): never on a developer's machine, never on a
+  preview deploy. Two locks hold it: each Sentry file initialises only when `NEXT_PUBLIC_VERCEL_ENV` is
+  `production` (Vercel sets it at build), and the Sentry variables live only in the Production environment of the
+  app's Vercel project. No local file names Sentry: not `.env.sample`, not `.env.development`, `.env.production` or
+  any `.env*.local`, and no `.env.sentry-build-plugin`; a local build neither sends events nor uploads source maps.
 - **Visits: one counter for the whole domain**, in the portal's Vercel project. Every app sends its views there, each
   path with its section's prefix, so one report shows the portal and every game, and a section is a filter by path.
 
@@ -35,12 +40,12 @@ Transfer project; then `SENTRY_ORG` and the token on Vercel) is an open question
 2. Project settings → Client Keys → copy the DSN. A DSN is public by design (it ships in the page's code).
 3. In the app: `@sentry/nextjs` at the same version as the other apps (`npm install --save-exact`), and the four
    files the portal and the No Man's Sky site use — `instrumentation.ts`, `instrumentation-client.ts`,
-   `sentry.server.config.ts`, `sentry.edge.config.ts`, each initialising only when `NEXT_PUBLIC_SENTRY_DSN` is set —
+   `sentry.server.config.ts`, `sentry.edge.config.ts`, each initialising only when `NEXT_PUBLIC_VERCEL_ENV === "production"` and `NEXT_PUBLIC_SENTRY_DSN` is set —
    and `withSentryConfig(nextConfig, { org, project, authToken, widenClientFileUpload: true, tunnelRoute:
    "/monitoring", webpack: { automaticVercelMonitors: false } })` in `next.config.ts`. A game with forms or sign-in
    adds `replayIntegration` and `feedbackIntegration` (the Report a Bug button) on the client, as No Man's Sky does.
-4. On the app's Vercel project, for production, preview and development:
-   - `NEXT_PUBLIC_SENTRY_DSN` — `vercel env add NEXT_PUBLIC_SENTRY_DSN --environment <env> --type config --value
+4. On the app's Vercel project, for **production only** (never preview or development, never a local file):
+   - `NEXT_PUBLIC_SENTRY_DSN` — `vercel env add NEXT_PUBLIC_SENTRY_DSN --environment production --type config --value
      "<dsn>" --yes` (the CLI refuses a `NEXT_PUBLIC_` value that looks like a credential unless `--type config`);
    - `SENTRY_ORG` = `ethberry`, `SENTRY_PROJECT` = the slug;
    - `SENTRY_AUTH_TOKEN` — an organization token for source maps; **the owner adds it** (a secret never passes through
