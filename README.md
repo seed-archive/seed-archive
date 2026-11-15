@@ -14,6 +14,7 @@ terms), and the routing to each game's section.
 
 - [docs/architecture.md](docs/architecture.md) — every decision behind this layout: what was chosen, why, what was
   rejected, and what it costs.
+- [docs/releases.md](docs/releases.md) — branches, and how a change reaches production.
 - [docs/monitoring.md](docs/monitoring.md) — Sentry and analytics of every app, and how a new game's app joins.
 - [docs/analytics.md](docs/analytics.md) — the choice of counter.
 - [docs/seo.md](docs/seo.md) — the rules of search shared by every section.

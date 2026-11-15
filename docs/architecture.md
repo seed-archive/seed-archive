@@ -179,6 +179,9 @@ One coordinating session and one session per game.
   repositories.
 - Each tells the other before touching what the other owns. Commits and merges need the owner's word unless he has
   given that session standing permission.
+- **Branches and releases** (the owner, 2026-11-15): only generators and `renovate-config` commit to `main`; every
+  site and the portal work on `dev`, and a release is the coordinator merging `dev` into `main` on the owner's word.
+  The steps are in `releases.md`.
 
 ## D11. Names that match
 
@@ -312,7 +315,8 @@ as a dead site. One list shows the archive alive whichever game moved last.
 - Links inside a note are full paths with the section's prefix (`/no-mans-sky/quests/farming`): every page of a game
   is another zone for the portal.
 - **A game's session writes its own file in the portal**, and only that file: the one exception to the portal being the
-  coordinator's. It goes in with the game's release, and the coordinator merges it on the owner's word.
+  coordinator's. It goes into the portal's `dev` with the game's release and reaches production with the portal's
+  release (`releases.md`).
 
 **The work it needs:**
 1. The portal: `app/release-notes`, the files above with No Man's Sky's notes moved over (links prefixed), the
