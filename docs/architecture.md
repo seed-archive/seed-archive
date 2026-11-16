@@ -349,6 +349,9 @@ as a dead site. One list shows the archive alive whichever game moved last.
 3. The old host's redirect sends `/release-notes` to `seedarchive.gg/release-notes` in one hop (the coordinator's).
 4. From then on a game's release adds its lines to its file in the portal, not to its own site.
 
+
+**One version** (the owner, 2026-11-16): the list is one, so the number is the archive's, not a game's:
+`Seed Archive 1.1 · No Man's Sky`. The rule is in `releases.md`, Version.
 ## D17. The map viewer is a package of its own, `seed-archive/map`
 
 **Chosen.** The owner, 2026-11-16: the viewer every game's map uses lives in one public repository, `seed-archive/map`,
