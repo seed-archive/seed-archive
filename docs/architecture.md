@@ -300,7 +300,8 @@ game. The menus differ because the games do.
   about a third longer than the English one; four leave room, whatever the game's name.
 - **On a phone** (below `md`, 900 px) the game's whole menu lives in the side drawer; the bar holds "Seed Archive",
   the game's name, the menu button and the account.
-- **About** (`/<slug>/about`) is about the site, not the game: it is in the game's footer, never in the header.
+- **About** (`/<slug>/about`) is about the site, not the game: it is in the game's footer, never in the header,
+  and the game's home page links it once from its text, where it says what the archive does.
 
 **Until the shared package of D3 exists**, every app copies the same look: Material UI's `AppBar` with a bottom divider,
 `h6` for the name, 64 px high (56 on a phone). The portal follows it in plain CSS.
