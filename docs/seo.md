@@ -25,6 +25,9 @@ with a link to this one. The No Man's Sky section's is `docs/seo.md` of its site
 
 - One header for the whole archive (D15): "Seed Archive", a plain link to the domain's root, then the game's name, a
   link to its section's home, then the game's own menu.
+- A game's menu has at most four items, each a visitor's question with the same name in every game: Catalog,
+  Guides, Tools, Quests (D15). More pages go into their dropdowns; on a phone the whole menu is in the drawer; About
+  is in the footer, not the header.
 - A game's footer speaks for its game (D12): its sections, guides, and tools. The legal pages and anything about the
   archive itself belong to the portal's footer.
 - **A full-screen tool keeps the header and drops the rest** (the owner, 2026-11-15; first Valheim's map): the page is

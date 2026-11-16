@@ -286,6 +286,22 @@ and on every game's site. Each game keeps its own navigation inside it.
 **Why.** A visitor reads one site, not several: the name and the account must not change when the path enters another
 game. The menus differ because the games do.
 
+**The game's menu** (the owner, 2026-11-16). The items differ per game, but their kinds do not:
+- **A top-level item is a visitor's question, not a topic.** There are four, each with one name in every game:
+  - **Catalog** — "show me what there is": the finds, one record each.
+  - **Guides** — "what is best and why": text and tables, grouped by item.
+  - **Tools** — "find or compute it for me": a page whose point is the result of a form (finders, calculators,
+    recipe lists with a filter, Valheim's map).
+  - **Quests** — "how do I pass it": quests and puzzles step by step.
+
+  A game shows only the ones it has.
+- **At most four items on a desktop.** Anything more goes into their dropdowns, never into a fifth item: a fifth
+  would need a fifth question. The width agrees: at 900 px five items leave about 80 px, and a translated label is
+  about a third longer than the English one; four leave room, whatever the game's name.
+- **On a phone** (below `md`, 900 px) the game's whole menu lives in the side drawer; the bar holds "Seed Archive",
+  the game's name, the menu button and the account.
+- **About** (`/<slug>/about`) is about the site, not the game: it is in the game's footer, never in the header.
+
 **Until the shared package of D3 exists**, every app copies the same look: Material UI's `AppBar` with a bottom divider,
 `h6` for the name, 64 px high (56 on a phone). The portal follows it in plain CSS.
 
