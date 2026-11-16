@@ -25,12 +25,18 @@ with a link to this one. The No Man's Sky section's is `docs/seo.md` of its site
 
 - One header for the whole archive (D15): "Seed Archive", a plain link to the domain's root, then the game's name, a
   link to its section's home, then the game's own menu.
+- A game's menu has at most four items, each a visitor's question with the same name in every game: Catalog,
+  Guides, Tools, Quests (D15). More pages go into their dropdowns; on a phone the whole menu is in the drawer; About
+  is in the footer, not the header, and linked once from the lead of the game's home page.
+- A page's address names its menu item: `/<slug>/guides/…`, `/<slug>/tools/<tool>`, `/<slug>/quests/…`, each item
+  with an index page; the catalog's lists stay at `/<slug>/<kind>` (D15).
 - A game's footer speaks for its game (D12): its sections, guides, and tools. The legal pages and anything about the
   archive itself belong to the portal's footer.
 - **A full-screen tool keeps the header and drops the rest** (the owner, 2026-11-15; first Valheim's map): the page is
-  the tool across the whole window, with its controls over it, no breadcrumbs and no footer. The shared header stays,
-  and it is the only way out. Such a page still has its title, description and canonical address, is in the sitemap,
-  and is linked from at least two pages of its game; the footer's links stay on every other page.
+  the tool across the whole window, no breadcrumbs and no footer; the only buttons over it are the tool's own (a
+  map's zoom in and out). The shared header stays, with its menu and the site's name, and it is the only way out.
+  Such a page still has its title, description and canonical address, is in the sitemap, and is linked from at least
+  two pages of its game; the footer's links stay on every other page.
 
 ## Links
 
@@ -73,7 +79,7 @@ with a link to this one. The No Man's Sky section's is `docs/seo.md` of its site
 
 ## Review before a release
 
-1. Read the served HTML, not the source: `curl -s localhost:5001/<slug>/<path>` shows what a crawler gets (the
+1. Read the served HTML, not the source: `curl -s localhost:5010/<slug>/<path>` shows what a crawler gets (the
    `<title>`, the `<h1>`, the links).
 2. No link or picture of the served HTML starts with a bare `/` outside `/<slug>/`, except the header's "Seed Archive"
    and the shared legal pages (`curl … | grep -oE '(href|src)="/[^"]*"'`).

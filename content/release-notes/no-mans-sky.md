@@ -1,14 +1,21 @@
 
-## 14 November 2026: version 2.4
+## 16 November 2026: version 1.1
 
-- Added [farming](/no-mans-sky/quests/farming): every farm plant, what a harvest sells for at a space station, how long it grows, and how many plants are worth planting, with the price a crop loses as you sell it and the markup NipNip Buds take as contraband.
+- Added recipes: [refiner recipes](/no-mans-sky/tools/refiner-recipes), [Nutrient Processor recipes](/no-mans-sky/tools/cooking-recipes), and [crafting recipes](/no-mans-sky/tools/crafting-recipes). Filter by what you hold or what you want; pick the Portable, Medium, or Large Refiner; open any item for its card and its assembly steps down to the raw resources.
+- Added a Crafting group of guides: [food for scanning](/no-mans-sky/guides/crafting/food-for-scanning), the dishes whose bonus in the Nutrient Ingestor multiplies what a scan pays; [food for hazards](/no-mans-sky/guides/crafting/food-for-hazards); [best-selling dishes](/no-mans-sky/guides/crafting/best-selling-dishes); [refiner loops](/no-mans-sky/guides/crafting/refiner-loops), drawn as the game draws its assembly steps; and [refining for money](/no-mans-sky/guides/crafting/refining-for-money), with nanites. [Farming](/no-mans-sky/guides/crafting/farming) joins them.
+- Added the best of the best: [best multitools](/no-mans-sky/guides/multitools/best-multitools), [best Interceptors](/no-mans-sky/guides/ships/best-interceptors), and [best creatures](/no-mans-sky/guides/creatures/best-creatures): how close the best finds come to the top, and how often.
+- Every tool now lives under [tools](/no-mans-sky/tools); old addresses lead there.
+
+## 14 November 2026: version 1.0
+
+- Added [farming](/no-mans-sky/guides/crafting/farming): every farm plant, what a harvest sells for at a space station, how long it grows, and how many plants are worth planting, with the price a crop loses as you sell it and the markup NipNip Buds take as contraband.
 - Added [Interceptor prices](/no-mans-sky/guides/interceptor-prices): what a claimed Sentinel Interceptor is worth by its cargo slots and its class.
-- The ship builders are open: [Sentinel Interceptors](/no-mans-sky/interceptor-finder), [capital freighters](/no-mans-sky/capital-freighter-finder), [regular freighters](/no-mans-sky/freighter-finder), [living ships](/no-mans-sky/living-ship-finder), and [living frigates](/no-mans-sky/living-frigate-finder), with the guides to [living ships](/no-mans-sky/guides/living-ships) and [organic frigates](/no-mans-sky/guides/organic-frigates).
+- The ship builders are open: [Sentinel Interceptors](/no-mans-sky/tools/interceptor-finder), [capital freighters](/no-mans-sky/tools/capital-freighter-finder), [regular freighters](/no-mans-sky/tools/freighter-finder), [living ships](/no-mans-sky/tools/living-ship-finder), and [living frigates](/no-mans-sky/tools/living-frigate-finder), with the guides to [living ships](/no-mans-sky/guides/living-ships) and [organic frigates](/no-mans-sky/guides/organic-frigates).
 - A system's page now lists what floats in its space: space hulks, asteroid belts, ice fields, and whether it holds a Relic Gate.
 - Every guide is counted again over more than three times as many systems, so its numbers hold closer.
 - Smaller changes: every section of a guide can be linked, and farming and [exosuit modules](/no-mans-sky/guides/exosuit-modules) link the Haz-Mat Gauntlet each way.
 
-## 11 November 2026: version 2.3
+## 11 November 2026
 
 - Added [quests](/no-mans-sky/quests): from [The Artemis Path](/no-mans-sky/quests/the-artemis-path) to [Lost in Space](/no-mans-sky/quests/lost-in-space), each with its steps, their hints, and every item it gives, and [puzzle answers](/no-mans-sky/quests/puzzles) for the terminals and monoliths.
 - Added a guide to every merchant with a stock: the [Galactic Trade Terminal](/no-mans-sky/guides/galactic-trade-terminal), the [Cartographer](/no-mans-sky/guides/cartographer), the [Salvage Exchange](/no-mans-sky/guides/salvage-exchange), the [Scrap Dealer](/no-mans-sky/guides/scrap-dealer), the [Forsaken Trader](/no-mans-sky/guides/forsaken-trader), the [Outlaw Station](/no-mans-sky/guides/outlaw-station), starship pilots and alien traders, and more. Each lists everything it sells, with pictures and prices, and a barter merchant shows how likely it is to take your offer.
@@ -16,7 +23,7 @@
 - Added the [corvettes](/no-mans-sky/guides/corvettes) and [corvette modules](/no-mans-sky/guides/corvette-modules) guides: how to build a corvette, where its parts come from, and what each part adds.
 - Smaller corrections across the guides: illegal modules come from an Outlaw Station and the Scrap Dealer, an upgraded ship's stats are rolled again at its new class, and every guide now links the merchants and quests it names.
 
-## 8 November 2026: version 2.2
+## 8 November 2026
 
 - Added [fishing](/no-mans-sky/guides/fishing): every fish, where and when it bites, what bait does, and why a fish is worth catching.
 - Added [excavation finds](/no-mans-sky/guides/excavation-finds): every fossil you dig up at Ancient Bones, and the skeleton displays they build.
@@ -26,17 +33,17 @@
 - Fishing and excavation finds sit with the planets, and the guides read in one line from the galaxy down to the creatures.
 - Smaller corrections across the guides: a freighter battle counts the moment it starts, a dreadnought's module stays yours when the freighter you saved is lost, and a module's stats are rolled when you install it.
 
-## 6 November 2026: version 2.1
+## 6 November 2026
 
 - Added the modules of every item: what each upgrade module can raise at each class, and how often an install rolls each stat. They are on [multitool modules](/no-mans-sky/guides/multitool-modules), [starship modules](/no-mans-sky/guides/starship-modules), [exosuit modules](/no-mans-sky/guides/exosuit-modules), [freighter technology](/no-mans-sky/guides/freighter-technology), the modules of each exocraft from the [Roamer](/no-mans-sky/guides/roamer-modules) to the [Minotaur](/no-mans-sky/guides/minotaur-modules), and [supercharged slots](/no-mans-sky/guides/supercharged-slots), which says where each module goes.
-- [How lucky am I?](/no-mans-sky/how-lucky-am-i) now weighs supercharged slots by what their figure is worth in damage: a square above every other figure, and a T below.
+- [How lucky am I?](/no-mans-sky/tools/how-lucky-am-i) now weighs supercharged slots by what their figure is worth in damage: a square above every other figure, and a T below.
 
-## 5 November 2026: version 2.0
+## 5 November 2026
 
 - Added the [guides](/no-mans-sky/guides).
-- Added [How lucky am I?](/no-mans-sky/how-lucky-am-i), which scores a multitool or a ship you found.
+- Added [How lucky am I?](/no-mans-sky/tools/how-lucky-am-i), which scores a multitool or a ship you found.
 
-## 1 November 2026: version 1.0
+## 1 November 2026
 
 🎉 The first public release.
 

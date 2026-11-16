@@ -179,6 +179,9 @@ One coordinating session and one session per game.
   repositories.
 - Each tells the other before touching what the other owns. Commits and merges need the owner's word unless he has
   given that session standing permission.
+- **Branches and releases** (the owner, 2026-11-15): only generators and `renovate-config` commit to `main`; every
+  site and the portal work on `dev`, and a release is the coordinator merging `dev` into `main` on the owner's word.
+  The steps are in `releases.md`.
 
 ## D11. Names that match
 
@@ -283,6 +286,28 @@ and on every game's site. Each game keeps its own navigation inside it.
 **Why.** A visitor reads one site, not several: the name and the account must not change when the path enters another
 game. The menus differ because the games do.
 
+**The game's menu** (the owner, 2026-11-16). The items differ per game, but their kinds do not:
+- **A top-level item is a visitor's question, not a topic.** There are four, each with one name in every game:
+  - **Catalog** — "show me what there is": the finds, one record each.
+  - **Guides** — "what is best and why": text and tables, grouped by item.
+  - **Tools** — "find or compute it for me": a page whose point is the result of a form (finders, calculators,
+    recipe lists with a filter, Valheim's map).
+  - **Quests** — "how do I pass it": quests and puzzles step by step.
+
+  A game shows only the ones it has.
+- **At most four items on a desktop.** Anything more goes into their dropdowns, never into a fifth item: a fifth
+  would need a fifth question. The width agrees: at 900 px five items leave about 80 px, and a translated label is
+  about a third longer than the English one; four leave room, whatever the game's name.
+- **On a phone** (below `md`, 900 px) the game's whole menu lives in the side drawer; the bar holds "Seed Archive",
+  the game's name, the menu button and the account.
+- **A page's address names its item** (the owner, 2026-11-16): `/<slug>/guides/…`, `/<slug>/tools/<tool>`,
+  `/<slug>/quests/…`, each with its index at `/<slug>/guides`, `/<slug>/tools`, `/<slug>/quests`, and the breadcrumb
+  the same: Home › Tools › the tool (a full-screen tool has no breadcrumb: `seo.md`, Header and footer). The catalog is the exception: its lists sit at `/<slug>/<kind>`
+  (`/no-mans-sky/multitools`), a short address for the thing itself. A new game starts this way (Valheim's map is
+  `/valheim/tools/map`); a page that moves keeps its old address as a 308.
+- **About** (`/<slug>/about`) is about the site, not the game: it is in the game's footer, never in the header,
+  and the game's home page links it once from its text, in its lead.
+
 **Until the shared package of D3 exists**, every app copies the same look: Material UI's `AppBar` with a bottom divider,
 `h6` for the name, 64 px high (56 on a phone). The portal follows it in plain CSS.
 
@@ -309,10 +334,11 @@ as a dead site. One list shows the archive alive whichever game moved last.
   heading `## <day Month year>: version <n>` with its lines under it, as in the No Man's Sky site today.
 - The page reads every file and merges the releases by date, newest first; each heading carries the game's name
   ("No Man's Sky 2.4"). A game keeps its own version numbers.
-- Links inside a note are full paths with the section's prefix (`/no-mans-sky/quests/farming`): every page of a game
+- Links inside a note are full paths with the section's prefix (`/no-mans-sky/guides/crafting/farming`): every page of a game
   is another zone for the portal.
 - **A game's session writes its own file in the portal**, and only that file: the one exception to the portal being the
-  coordinator's. It goes in with the game's release, and the coordinator merges it on the owner's word.
+  coordinator's. It goes into the portal's `dev` with the game's release and reaches production with the portal's
+  release (`releases.md`).
 
 **The work it needs:**
 1. The portal: `app/release-notes`, the files above with No Man's Sky's notes moved over (links prefixed), the
@@ -322,6 +348,34 @@ as a dead site. One list shows the archive alive whichever game moved last.
    sitemap, and its menu links to it with a plain `<a href="/release-notes">` (that session's).
 3. The old host's redirect sends `/release-notes` to `seedarchive.gg/release-notes` in one hop (the coordinator's).
 4. From then on a game's release adds its lines to its file in the portal, not to its own site.
+
+
+**One version** (the owner, 2026-11-16): the list is one, so the number is the archive's, not a game's:
+`Seed Archive 1.1 · No Man's Sky`. The rule is in `releases.md`, Version.
+## D17. The map viewer is a package of its own, `seed-archive/map`
+
+**Chosen.** The owner, 2026-11-16: the viewer every game's map uses lives in one public repository, `seed-archive/map`,
+an npm package that each site installs from GitHub by a tag (`github:seed-archive/map#v1.2.0`). It holds the page side
+only: the worker that calls a generator's WebAssembly, and the viewer with its pan, zoom, tiles, pins, ruler and point
+information. Each game passes in its own palette, names, bounds and `.wasm`; nothing in the package names a game.
+
+**Why.** Valheim draws its maps first and Oxygen Not Included next, and the owner wants the most reused, so there is
+the least code to write and to download. The two worlds differ (round and seen from above; a rectangle of cells seen
+from the side), but the browser asks every generator the same four things, and the viewer is the same.
+
+**Rejected.**
+- **A copy in every site.** The copies drift within a month.
+- **The monorepo of D3.** A large move for one shared part; D3's question stays open for the header, theme and
+  sign-in.
+
+**How it works.**
+- A session of its own, the map session, owns the repository and the interface between a generator and the viewer
+  (the owner, 2026-11-16). Its first version is Valheim's viewer, lifted out; a game's session that needs a change
+  asks the map session, or sends a pull request.
+- Branches as for a site: work on `dev`, a release is the map session merging `dev` into `main` and tagging it, on the
+  owner's word. A site
+  moves to a new tag through Renovate's pull request into its own `dev`.
+- Public, so it never names a generator's internals; the interface it calls is the one in each generator's `crates/web`.
 
 ## State on 2026-11-14 and the order of the move
 

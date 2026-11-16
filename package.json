@@ -11,9 +11,9 @@
     "node": ">=24"
   },
   "scripts": {
-    "dev": "next dev -p 5000",
+    "dev": "next dev -p 5001",
     "build": "next build",
-    "start": "next start -p 5100",
+    "start": "next start -p 5002",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

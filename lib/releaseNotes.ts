@@ -4,7 +4,8 @@ import path from "node:path";
 import { GAMES } from "@/lib/games";
 
 // The release notes of the whole archive (docs/architecture.md, D16): one
-// Markdown file per section in content/release-notes, merged by date.
+// Markdown file per section in content/release-notes, merged by date. The
+// version in a heading is the archive's (docs/releases.md), not the game's.
 // A file holds releases written by hand, each a heading
 // "## <day Month year>: version <n>" (the version may be missing), an
 // optional line of text, and a list; inline links are the only markup.
@@ -95,8 +96,18 @@ export async function readReleases(): Promise<Release[]> {
       ),
     ),
   );
-  return all
-    .flat()
+  const releases = all.flat();
+  // One version, one day: every section released together shares it.
+  const days = new Map<string, number>();
+  for (const release of releases) {
+    if (!release.version) continue;
+    const day = days.get(release.version);
+    if (day !== undefined && day !== release.date.getTime()) {
+      throw new Error(`version ${release.version} on two days`);
+    }
+    days.set(release.version, release.date.getTime());
+  }
+  return releases
     .sort(
       (a, b) =>
         b.date.getTime() - a.date.getTime() ||
@@ -104,9 +115,14 @@ export async function readReleases(): Promise<Release[]> {
     );
 }
 
-// The heading of a release as a visitor reads it: "No Man's Sky 2.4".
+// The heading of a release as a visitor reads it. The version is the whole
+// archive's, one number for every section released that day:
+// "Seed Archive 1.1 · No Man's Sky", or "Seed Archive 1.0" for the portal.
+// Releases from before the archive had one version show the section alone.
 export function releaseTitle(release: Release): string {
-  return release.version
-    ? `${release.section} ${release.version}`
-    : release.section;
+  if (!release.version) return release.section;
+  const archive = `${PORTAL.name} ${release.version}`;
+  return release.section === PORTAL.name
+    ? archive
+    : `${archive} · ${release.section}`;
 }
