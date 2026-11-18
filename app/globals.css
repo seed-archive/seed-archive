@@ -109,7 +109,8 @@ body {
 .cover {
   display: block;
   width: 100%;
-  aspect-ratio: 2 / 1;
+  /* Press-kit key art is 16:9; a narrower frame cuts its title. */
+  aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 
@@ -133,6 +134,28 @@ body {
   margin-top: 6px;
   font-weight: 600;
   color: var(--accent);
+}
+
+/* A game not out yet: the same card, not a link, so it does not move. */
+.game.soon:hover {
+  transform: none;
+  border-color: var(--line);
+}
+
+.badge {
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 2px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.credit {
+  font-size: 0.75rem;
+  color: var(--muted);
 }
 
 .footer {
