@@ -1,4 +1,12 @@
 
+## 18 November 2026: version 1.2
+
+- The [Forsaken Trader](/no-mans-sky/guides/stations/forsaken-trader) guide now shows where to find Haunting Mementos, what calls Boundary Horrors, and what the Larva Cannon becomes at class S.
+- New guides: [charts](/no-mans-sky/guides/stations/charts), every chart and what it finds; [space station decoration](/no-mans-sky/guides/stations/station-decoration), every exterior decoration with its cost.
+- New page [Expeditions](/no-mans-sky/quests/expeditions): every expedition, what made it its own, and the rewards every save can collect.
+- The [Deep-Space Outpost](/no-mans-sky/guides/stations/deep-space-outpost) guide now lists what the Salvage Processor gives and the courier contracts.
+- [Food for scanning](/no-mans-sky/guides/crafting/food-for-scanning) now shows the whole recipe of the best scan dishes, down to what you gather.
+
 ## 16 November 2026: version 1.1
 
 - Added recipes: [refiner recipes](/no-mans-sky/tools/refiner-recipes), [Nutrient Processor recipes](/no-mans-sky/tools/cooking-recipes), and [crafting recipes](/no-mans-sky/tools/crafting-recipes). Filter by what you hold or what you want; pick the Portable, Medium, or Large Refiner; open any item for its card and its assembly steps down to the raw resources.
