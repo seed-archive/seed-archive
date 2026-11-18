@@ -352,30 +352,38 @@ as a dead site. One list shows the archive alive whichever game moved last.
 
 **One version** (the owner, 2026-11-16): the list is one, so the number is the archive's, not a game's:
 `Seed Archive 1.1 · No Man's Sky`. The rule is in `releases.md`, Version.
-## D17. The map viewer is a package of its own, `seed-archive/map`
+## D17. The map viewer is a package of its own, `@seed-archive/map`
 
-**Chosen.** The owner, 2026-11-16: the viewer every game's map uses lives in one public repository, `seed-archive/map`,
-an npm package that each site installs from GitHub by a tag (`github:seed-archive/map#v1.2.0`). It holds the page side
-only: the worker that calls a generator's WebAssembly, and the viewer with its pan, zoom, tiles, pins, ruler and point
-information. Each game passes in its own palette, names, bounds and `.wasm`; nothing in the package names a game.
+**Chosen.** The owner, 2026-11-16: the viewer every game's map uses is one npm package, `@seed-archive/map`, built
+from the private repository `seed-archive/map` and published to GitHub Packages; each site installs it by version.
+It holds the page side only: the worker that calls a game's WebAssembly, and the viewer with its pan, zoom, tiles,
+pins, ruler and point information. Each game passes in its own palette, names, bounds and `.wasm`; nothing in the
+package names a game.
 
 **Why.** Valheim draws its maps first and Oxygen Not Included next, and the owner wants the most reused, so there is
 the least code to write and to download. The two worlds differ (round and seen from above; a rectangle of cells seen
-from the side), but the browser asks every generator the same four things, and the viewer is the same.
+from the side), but the browser asks every game the same few things, and the viewer is the same.
+
+**Why private** (the owner, 2026-11-16, after the first version): the viewer is shared code, not a page a visitor
+sees, and nothing requires it to be public. Vercel's limit on private repositories does not apply: no Vercel project
+deploys it, a site only installs the built package.
 
 **Rejected.**
 - **A copy in every site.** The copies drift within a month.
 - **The monorepo of D3.** A large move for one shared part; D3's question stays open for the header, theme and
   sign-in.
+- **A public repository installed by git tag** (the first version, 1.0.0): it shipped sources for every site to build.
 
 **How it works.**
-- A session of its own, the map session, owns the repository and the interface between a generator and the viewer
-  (the owner, 2026-11-16). Its first version is Valheim's viewer, lifted out; a game's session that needs a change
-  asks the map session, or sends a pull request.
-- Branches as for a site: work on `dev`, a release is the map session merging `dev` into `main` and tagging it, on the
-  owner's word. A site
-  moves to a new tag through Renovate's pull request into its own `dev`.
-- Public, so it never names a generator's internals; the interface it calls is the one in each generator's `crates/web`.
+- A session of its own, the map session, owns the repository, the package and the interface between a game and the
+  viewer. A game's session that needs a change asks it, or sends a pull request.
+- Branches as for a site: work on `dev`; a release is the map session merging `dev` into `main`, tagging it and
+  publishing the built package, on the owner's word.
+- A site's `.npmrc` names only the registry, `@seed-archive:registry=https://npm.pkg.github.com`; the token stays out
+  of the repository. Locally it comes from the developer's own `~/.npmrc`; on Vercel the project's `NPM_RC` variable
+  holds the whole file, the registry line and a token with `read:packages` (the coordinator sets the variable, the
+  owner gives the token).
+- Renovate needs the same read access to see new versions; until it has it, a site moves to a new version by hand.
 
 ## State on 2026-11-14 and the order of the move
 

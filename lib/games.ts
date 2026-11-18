@@ -10,7 +10,8 @@ export type Game = {
   // Vercel project. Never the zone's old public address: that one redirects
   // to seedarchive.gg, and forwarding to it would loop.
   zone: string;
-  // A picture served by the zone itself, under its own section.
+  // The game's official key art from its press kit, served by the portal
+  // (public/games/<slug>.jpg) and credited to its owner on the card.
   cover: string;
   // The path at the deployment's root where Vercel Analytics of the zone's
   // project serves its script and takes its events (/<id>/script.js,
@@ -30,8 +31,22 @@ export const GAMES: Game[] = [
     zone:
       process.env.NO_MANS_SKY_ZONE ??
       "https://no-mans-sky-site-ethberrys-projects.vercel.app",
-    cover: "/no-mans-sky/assets/img/galaxies/0.jpg",
+    cover: "/games/no-mans-sky.jpg",
     analytics: "a1110995d7968c05",
     owner: "Hello Games",
+  },
+];
+
+// A game whose section is not out yet: shown on the root page as coming soon,
+// with no link and no forwarding. It moves into GAMES on its release.
+export type ComingGame = Pick<Game, "slug" | "name" | "pitch" | "cover" | "owner">;
+
+export const COMING: ComingGame[] = [
+  {
+    slug: "valheim",
+    name: "Valheim",
+    pitch: "Seeds, maps and guides for the Viking survival game.",
+    cover: "/games/valheim.jpg",
+    owner: "Iron Gate",
   },
 ];

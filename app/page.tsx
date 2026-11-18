@@ -1,5 +1,5 @@
 import { Footer } from "@/components/Footer";
-import { GAMES } from "@/lib/games";
+import { COMING, GAMES } from "@/lib/games";
 import { readReleases, releaseTitle } from "@/lib/releaseNotes";
 
 // How many releases the root page shows; the rest are on /release-notes.
@@ -31,8 +31,22 @@ export default async function Home() {
                 <span className="enter">
                   Open <span aria-hidden="true">→</span>
                 </span>
+                <span className="credit">Art © {game.owner}</span>
               </span>
             </a>
+          </li>
+        ))}
+        {COMING.map((game) => (
+          <li key={game.slug}>
+            <div className="game soon">
+              <img className="cover" src={game.cover} alt="" />
+              <span className="caption">
+                <span className="name">{game.name}</span>
+                <span className="pitch">{game.pitch}</span>
+                <span className="badge">Coming soon</span>
+                <span className="credit">Art © {game.owner}</span>
+              </span>
+            </div>
           </li>
         ))}
       </ul>
