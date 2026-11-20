@@ -1,4 +1,9 @@
 
+## 20 November 2026: version 1.3
+
+- New tool [Starships](/no-mans-sky/tools/starship-finder): put an exotic (the rare squid included), a solar ship, a Fighter, a hauler, an explorer, or a shuttle together from its parts, and see every shape the game makes.
+- The [creature catalog](/no-mans-sky/creature) now lists only creatures whose three grades are S.
+
 ## 18 November 2026: version 1.2
 
 - The [Forsaken Trader](/no-mans-sky/guides/stations/forsaken-trader) guide now shows where to find Haunting Mementos, what calls Boundary Horrors, and what the Larva Cannon becomes at class S.
