@@ -30,10 +30,14 @@ const nextConfig: NextConfig = {
         // still writes it into the game's build, so the game's views arrive
         // here; they go to the portal's own counter, the one count for the
         // domain (docs/analytics.md), through the portal's production alias.
-        {
-          source: `/${game.analytics}/:path*`,
-          destination: `${PORTAL}/${PORTAL_ANALYTICS}/:path*`,
-        },
+        ...(game.analytics
+          ? [
+              {
+                source: `/${game.analytics}/:path*`,
+                destination: `${PORTAL}/${PORTAL_ANALYTICS}/:path*`,
+              },
+            ]
+          : []),
       ]),
       // Any other path the portal has no page for: the old links of No Man's
       // Sky, from before its section (/guides/…, /statistics/…). Its own

@@ -16,6 +16,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.5,
     },
+    {
+      url: `${base}/credits`,
+      changeFrequency: "monthly",
+      priority: 0.3,
+    },
     ...["privacy", "terms"].map((page) => ({
       url: `${base}/${page}`,
       changeFrequency: "yearly" as const,

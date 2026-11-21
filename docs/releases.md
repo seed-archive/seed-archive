@@ -30,7 +30,7 @@ A release is **the coordinator merging `dev` into `main`** and putting that on p
 owner's word in the coordinator's own conversation; a session quoting the owner is not that word.
 
 1. **Ready.** The session that owns the repository says what is in `dev` for this release and that its build passes.
-2. **Release notes.** A release a visitor can see gets its lines, under the archive's next version, in the portal's
+2. **Release notes.** A release that changes a guide, a tool or the data (What the release notes say, below) gets its lines, under the archive's next version, in the portal's
    `content/release-notes/<slug>.md` (D16), committed to the portal's `dev` with it. The portal is released together
    with the game, or right after, so the notes appear with the change.
 3. **Review.** The check before a release in `seo.md` (titles, links, redirects, robots and sitemap), on the built
@@ -42,6 +42,18 @@ owner's word in the coordinator's own conversation; a session quoting the owner 
    - The portal: `vercel deploy --prod` from a checkout of `main`, never from `dev` or a branch.
 6. **Check on production.** The changed pages answer `200` on seedarchive.gg, old addresses redirect in one hop, the
    release notes show the release, and Sentry shows no new error from the release.
+
+## What the release notes say
+
+The owner, 2026-11-17: a player does not care how the site is built; he cares about the guides and the tools.
+- **A line goes in** when what a player uses changed: a new or rewritten guide, a new tool or a tool that answers
+  differently, new or corrected data in the catalog, and a guide or table regenerated for a new version of the game
+  (name that version).
+- **No line** for how the site works inside: headings, anchors, menus, layout, packages, frameworks, builds, hosting,
+  ports, monitoring, redirects. Such a release still happens; it just adds nothing to the notes.
+- A line says what the player gets, in his words, and links the page it is about (`seo.md`, Links).
+- A release whose every change is of the second kind gets no lines and no number of its own; the next release with
+  lines takes the next number.
 
 ## Version
 

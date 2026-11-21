@@ -385,6 +385,51 @@ deploys it, a site only installs the built package.
   owner gives the token).
 - Renovate needs the same read access to see new versions; until it has it, a site moves to a new version by hand.
 
+## D18. No page of pictures without a choice
+
+**Chosen.** The owner, 2026-11-20: a tool page, in any section, is something a player works with. A page of fixed
+models with nothing to pick is a gallery, not a tool, and is not made.
+
+**Why.** In his words: «там нет никакого интерактива, просто модельки, и это неинтересно». The archive's value is
+the choice — a builder over the parts a thing is made of — and later the search from that choice to a place in the
+game. The pictures alone are already in the game and on every wiki.
+
+**Where it came from.** The No Man's Sky section built a page of the reward starships, each a single fixed model
+drawn whole in the game's colours with the expedition or edition that gives it; the next step would have added the
+procedural reward ships as fixed pictures too. The owner had the page removed the same day, and nothing of it
+reached the site.
+
+**What follows.**
+- A thing gets a tool page only when it has choices.
+- A thing of one fixed shape gets no page, picture or tab of its own.
+- What was read about it stays in the game's generator's docs; a guide may still name it in a line.
+
+## D19. The shared packages live in one monorepo, `seed-archive/packages`
+
+**Chosen.** The owner, 2026-11-20: the packages every site installs — `@seed-archive/ui`, `@seed-archive/map` and the
+new `@seed-archive/globe` — live in one private repository, `seed-archive/packages`, managed with Lerna.
+
+**Why.** The globe needed a package of its own (a sphere is not the flat map), and a third repository would repeat
+the build, the tests, Renovate and the publishing of the other two. The map and the globe share markers, cards and
+controls; the interface package holds frames and charts both use. In one repository shared code is one module,
+not copies, and a change across two packages is one pull request.
+
+**How it works.**
+- npm workspaces under `packages/*` link the packages; Lerna, in independent mode, gives each its own version and
+  publishes it to GitHub Packages. A site keeps installing each package by name and version; nothing changes for it.
+- Each package keeps its owner: the UI session `ui`, the map session `map` and `globe`. A session changes only its
+  own package's folder; code two packages share is agreed between their sessions. The monorepo's setup (workspaces,
+  Lerna, Renovate, the release steps) is the coordinator's.
+- Branches as for a site: `dev` the default, `main` what is published; a release on the owner's word.
+- All three are private (D17's reasons hold); one token, `NPM_RC`, still reaches them all.
+
+**The move.** The globe starts there. `ui` and `map` move in with their history once their sessions have no
+unfinished work in the old repositories; the old repositories are then archived on the owner's word. Done the same
+day: both moved in with their history, and `seed-archive/ui` and `seed-archive/map` are archived.
+
+**Rejected.** A repository per package (three of each setup) and the monorepo of D3 (sites and packages together,
+rejected again in D17): this one holds packages only, which no Vercel project deploys.
+
 ## State on 2026-11-14 and the order of the move
 
 - **A. The release with the domain — done 2026-11-14.** `seedarchive.gg` on the portal, the No Man's Sky site under
@@ -403,10 +448,13 @@ deploys it, a site only installs the built package.
   `no-mans-sky-site`), one Vercel Analytics counter for the domain in the portal's project; the recipe for a new
   game in `docs/monitoring.md`.
 - **E. Themes** (D14): light, dark, the system's by default, one switch for the portal and every game; after D.
-- **G. One icon for Seed Archive** (the owner, 2026-11-15). Today the portal and the No Man's Sky site both serve No
-  Man's Sky's `favicon.ico` and `apple-icon.png`. Make one icon of the archive itself and serve it from the portal and
-  from every game's app (`app/favicon.ico`, `app/apple-icon.png`, and the web manifest if one is added), so the tab
-  reads the same on every page of the domain.
+- **G. The icon** (the owner, 2026-11-15; reopened 2026-11-16). Today the portal and the No Man's Sky site both serve
+  No Man's Sky's `favicon.ico` and `apple-icon.png`, and that style no longer fits an archive of several games. Two
+  ways, to be chosen by the owner:
+  - one icon of the archive itself, served from the portal and from every game's app, so the tab reads the same on
+    every page of the domain;
+  - an icon for each section: the archive's on the portal, and each game's app its own.
+  Either way it covers `app/favicon.ico`, `app/apple-icon.png`, and the web manifest if one is added.
 - **H. Our own event tracker** (the owner, 2026-11-15): count clicks on buttons ourselves instead of paying for
   Vercel Pro or adding Google Analytics with a consent banner (`docs/analytics.md`). Few events, so it stays simple:
   - one table of the whole archive in Supabase's `public` schema: event name, the page's path with its section's
@@ -418,3 +466,25 @@ deploys it, a site only installs the built package.
   The first event is the button that measures whether to build an Interceptor finder.
 - **I. Release notes move to the portal** (D16, the owner, 2026-11-15): first the portal's page with No Man's Sky's
   notes, then the No Man's Sky site's redirect and menu link.
+- **J. A shared package for the interface, `@seed-archive/ui`** (planned, the owner, 2026-11-17). D3's cost has
+  arrived: the parts every site shares are copies, and the copies drift. On 2026-11-17 the No Man's Sky, Valheim and
+  Oxygen Not Included sites hold `AuthProvider` (240 lines), `LocalizationProvider` and `SharedAnalytics` identical
+  in all three; `PageTrail` (breadcrumbs), `SlotTile` (an item's picture in an inventory slot), `ArchiveFooter`,
+  `providers` and `not-found` nearly so. `ArchiveBar` (406, 180 and 141 lines) differs, as it should: each game's
+  menu is its own; only its frame is the same.
+  - **The form**: the way of D17, a private repository `seed-archive/ui`, built and published to GitHub Packages,
+    installed by version, the same `.npmrc` and `NPM_RC` as the map package; work on `dev`, a release on the owner's
+    word. Nothing in it names a game: a site passes in its menu, names, paths and messages. The monorepo of D3 stays
+    rejected for the same reason as in D17.
+  - **First, what is identical** and only moves: the sign-in provider, the localization provider, the analytics,
+    the breadcrumbs, the slot tile, the 404 page.
+  - **Then the frames of the header and footer** (the owner, 2026-11-17: each game's menus, in the header and in the
+    footer, stay its own). The package holds only the outer part: the bar with "Seed Archive", its height and divider,
+    the place for the game's name and the account, the phone drawer, the footer's layout. Each game passes its own
+    menu and footer links in through props. The portal uses the same frames, in place of its plain CSS copy.
+  - **Later, as each is built once**: the theme switch of D14, the shared sign-in of D13, `track()` of H, the like
+    button. A part enters the package when a second site needs it, not before.
+  - **Not in it**: a game's screens, guides, finders and data; the map, which stays `@seed-archive/map`.
+  - **Owner**: a session of its own, the UI session (the owner, 2026-11-17), as the map session owns the map. It owns
+    the repository, the package and its interface with the sites; a game's session that needs a change asks it.
+  - **Open**: the package's name.

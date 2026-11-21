@@ -16,8 +16,10 @@ export type Game = {
   // The path at the deployment's root where Vercel Analytics of the zone's
   // project serves its script and takes its events (/<id>/script.js,
   // /<id>/view). On the shared domain that root is the portal, so the portal
-  // forwards it to the zone, or the game's visits are lost.
-  analytics: string;
+  // forwards it to the zone, or the game's visits are lost. Only a game that
+  // once had its own counter (No Man's Sky); a newer game sends its views to
+  // the portal's counter directly (docs/analytics.md).
+  analytics?: string;
   // Who owns the game, its names and images (the terms of service).
   owner: string;
 };
@@ -35,18 +37,20 @@ export const GAMES: Game[] = [
     analytics: "a1110995d7968c05",
     owner: "Hello Games",
   },
+  {
+    slug: "valheim",
+    name: "Valheim",
+    pitch: "Seeds, maps and guides for the Viking survival game.",
+    zone:
+      process.env.VALHEIM_ZONE ??
+      "https://valheim-site-ethberrys-projects.vercel.app",
+    cover: "/games/valheim.jpg",
+    owner: "Iron Gate",
+  },
 ];
 
 // A game whose section is not out yet: shown on the root page as coming soon,
 // with no link and no forwarding. It moves into GAMES on its release.
 export type ComingGame = Pick<Game, "slug" | "name" | "pitch" | "cover" | "owner">;
 
-export const COMING: ComingGame[] = [
-  {
-    slug: "valheim",
-    name: "Valheim",
-    pitch: "Seeds, maps and guides for the Viking survival game.",
-    cover: "/games/valheim.jpg",
-    owner: "Iron Gate",
-  },
-];
+export const COMING: ComingGame[] = [];
