@@ -12,6 +12,20 @@ const nextConfig: NextConfig = {
     return {
       // Each game's section is answered by the game's own deployment.
       afterFiles: GAMES.flatMap((game) => [
+        // A segment prefetch (headers rsc, next-router-prefetch and
+        // next-router-segment-prefetch): Vercel has already turned the path
+        // into /<path>.segments/<segment>.segment.rsc here, and the headers
+        // travel on to the game, whose own deployment turns the path a second
+        // time and answers 404. So the game gets the page's own path and finds
+        // the segment itself from the headers.
+        {
+          source: `/${game.slug}.segments/:segment(.+)\\.segment\\.rsc`,
+          destination: `${game.zone}/${game.slug}`,
+        },
+        {
+          source: `/${game.slug}/:page(.+?)\\.segments/:segment(.+)\\.segment\\.rsc`,
+          destination: `${game.zone}/${game.slug}/:page`,
+        },
         // A client navigation to the section's root (as after sign-in):
         // Vercel adds ".rsc" to the destination of an RSC request, and the
         // game keeps the data of its root page at /<slug>/index.rsc, not at
