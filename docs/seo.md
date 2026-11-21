@@ -43,7 +43,8 @@ with a link to this one. The No Man's Sky section's is `docs/seo.md` of its site
 - A link stands inside a sentence, and its anchor text appears on the page it opens (its `<h1>`, lead, or title). No
   "See also" or "See more" rows.
 - No page links to itself in its own text; the header and the footer are the only exception.
-- No links to Reddit (they leak rank). External links only where a page cites a rule.
+- No links to Reddit (they leak rank). External links only where a page cites a rule, and on the portal's
+  `/credits`, which links each person it thanks (the owner, 2026-11-17).
 - Every page of a game is reached from at least two other pages by a link in their text.
 - Every heading `h2` to `h4` of a text has an id from its words, unique on the page, so any section can be linked.
 
