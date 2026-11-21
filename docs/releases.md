@@ -60,10 +60,11 @@ The owner, 2026-11-17: a player does not care how the site is built; he cares ab
 One version for the whole archive (the owner, 2026-11-16), since the release notes are one list: every release is
 `Seed Archive <major>.<minor>`, whatever it carries.
 
-- A release raises the minor number: 1.0, 1.1, 1.2.
-- Opening a new game's section raises the major: Valheim opens as 2.0.
-- Every section released on one day shares that day's number; each writes it in its own file's heading
-  (`## 16 November 2026: version 1.1`), and the portal refuses to build if one number sits on two days.
+- A release raises the minor number: 1.0, 1.1, 1.2. Opening a new game's section is a release like any other and
+  does not raise the major (the owner, 2026-11-21: nothing changed enough for 2.0).
+- Sections released together share one number; each writes it in its own file's heading
+  (`## 16 November 2026: version 1.1`). Releases the owner calls apart get a number each, even on one day (2026-11-21:
+  No Man's Sky's text fixes 1.4, Valheim's opening 1.5). The portal refuses to build if one number sits on two days.
 - A game has no version of its own. Its releases from before the archive's 1.0 keep their dates, without numbers.
 
 The coordinator gives the number when the release is called, in step 2 below.

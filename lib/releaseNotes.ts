@@ -82,8 +82,8 @@ function parse(slug: string, source: string): Release[] {
   return releases;
 }
 
-// Every release of every section, newest first; on one day the portal's
-// release comes before a game's.
+// Every release of every section, newest first; on one day the higher version
+// comes first, then the portal's release before a game's.
 export async function readReleases(): Promise<Release[]> {
   const files = (await readdir(DIRECTORY)).filter((name) =>
     name.endsWith(".md"),
@@ -111,6 +111,9 @@ export async function readReleases(): Promise<Release[]> {
     .sort(
       (a, b) =>
         b.date.getTime() - a.date.getTime() ||
+        (b.version ?? "").localeCompare(a.version ?? "", "en", {
+          numeric: true,
+        }) ||
         Number(b.section === PORTAL.name) - Number(a.section === PORTAL.name),
     );
 }
