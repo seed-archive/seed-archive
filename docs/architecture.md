@@ -455,6 +455,10 @@ rejected again in D17): this one holds packages only, which no Vercel project de
     every page of the domain;
   - an icon for each section: the archive's on the portal, and each game's app its own.
   Either way it covers `app/favicon.ico`, `app/apple-icon.png`, and the web manifest if one is added.
+  Done for the portal on 2026-11-21: the archive's own icon, a sprout in soil drawn for 64 px (`app/icon.svg`, with
+  rounded corners), `favicon.ico` at 32 px rendered from it by headless Chrome on a transparent background, and a
+  square `apple-icon.png` at 180 px, since iOS rounds it itself and fills transparent corners with black. The game
+  sites still serve No Man's Sky's icon; which of the two ways they take is still the owner's.
 - **H. Our own event tracker** (the owner, 2026-11-15): count clicks on buttons ourselves instead of paying for
   Vercel Pro or adding Google Analytics with a consent banner (`docs/analytics.md`). Few events, so it stays simple:
   - one table of the whole archive in Supabase's `public` schema: event name, the page's path with its section's

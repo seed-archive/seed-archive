@@ -82,8 +82,17 @@ body {
   gap: 24px;
 }
 
+/* Cards in one row share its height: the grid stretches each item to the
+   tallest, the card fills its item, and the pitch takes the spare room, so
+   "Open" and the credit line up however long a pitch is. */
+.games > li {
+  display: flex;
+}
+
 .game {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -115,6 +124,7 @@ body {
 }
 
 .caption {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -127,6 +137,7 @@ body {
 }
 
 .pitch {
+  flex: 1;
   color: var(--muted);
 }
 
