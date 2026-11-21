@@ -27,6 +27,11 @@ the **portal's** Vercel project (`seed-archive`, Hobby); its path at the domain'
 `<Analytics scriptSrc="/933b9afd1a52216d/script.js" endpoint="/933b9afd1a52216d" />`. One report shows the portal and
 every game; sections by path. Still Hobby: views only, no clicks.
 
+Production only (the owner, 2026-11-21): the counter renders only when `NEXT_PUBLIC_VERCEL_ENV` is `production`, as
+Sentry does. Its script exists only on Vercel, so a local page asked for it and got a 404, and a local or preview
+visit is not a visitor. The portal checks it in `app/layout.tsx`; the games' apps through the shared
+`SharedAnalytics` of `@seed-archive/ui`.
+
 The switch: for a few minutes the portal sent to the No Man's Sky project's path `/a1110995d7968c05/`, which the
 portal forwards there. Once the No Man's Sky site sends to the portal's path, Web Analytics is turned off in the
 No Man's Sky project and that forwarding (`analytics` in `lib/games.ts`) is removed — one source of numbers only.

@@ -35,8 +35,11 @@ export default function RootLayout({ children }: PropsWithChildren) {
         {children}
         {/* The one count for the whole domain lives in the portal's own
             project: every game's app sends its views here too
-            (docs/analytics.md). */}
-        <Analytics />
+            (docs/analytics.md). Production only: its script exists only on
+            Vercel, and a local or preview visit is not a visitor. */}
+        {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? (
+          <Analytics />
+        ) : null}
       </body>
     </html>
   );

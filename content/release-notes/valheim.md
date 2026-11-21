@@ -1,4 +1,4 @@
-## 21 November 2026: version 2.0
+## 21 November 2026: version 1.5
 
 Valheim opens at [seedarchive.gg/valheim](/valheim).
 
