@@ -1,3 +1,13 @@
+## 23 November 2026: version 1.6
+
+- [Nidavellir](/valheim/tools/nidavellir): pick an idol, an item and the step you aim for, and get the character names whose first try at the Forge of Potential raises it instead of shattering it.
+- The [Forge of Potential](/valheim/guides/forge-of-potential) guide rewritten: what can be upgraded there, how a fresh character raises a piece without breaking it, and how much comes back when a piece breaks.
+- [Wind](/valheim/tools/wind): which way the wind blows at any hour of the year, the same in every world.
+- [Best seeds](/valheim/tools/best-seeds): the best seeds by the seed rating, sorted by the score or by the biome you care about.
+- [Taming animals](/valheim/guides/basics/taming): which animals you can tame and with what, eggs and breeding, and riding.
+- [Staffs](/valheim/catalog/staffs): every staff by biome, with what each casts and what a cast costs you.
+- [Bugs](/valheim/bugs): the Helmet of the Protector never reaches the Forge of Potential.
+
 ## 21 November 2026: version 1.5
 
 Valheim opens at [seedarchive.gg/valheim](/valheim).
