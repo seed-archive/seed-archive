@@ -1,3 +1,7 @@
+## 24 November 2026: version 1.7
+
+- Valheim now reads in Russian, Spanish and German: pick the language at the top of a page.
+
 ## 23 November 2026: version 1.6
 
 - [Nidavellir](/valheim/tools/nidavellir): pick an idol, an item and the step you aim for, and get the character names whose first try at the Forge of Potential raises it instead of shattering it.

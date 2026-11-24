@@ -50,6 +50,7 @@ export const GAMES: Game[] = [
       "https://valheim-site-ethberrys-projects.vercel.app",
     cover: "/games/valheim.jpg",
     owner: "Iron Gate",
+    localized: true,
   },
 ];
 
