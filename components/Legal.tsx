@@ -1,10 +1,12 @@
 import type { ReactNode } from "react";
 
 import { Footer } from "@/components/Footer";
+import type { Locale } from "@/lib/locales";
 
 // The frame of a legal page of the archive: the title, the date of this
 // version, and its sections (docs/architecture.md, D12).
 export function LegalDocument(props: {
+  lang: Locale;
   title: string;
   updated: string;
   children: ReactNode;
@@ -16,7 +18,7 @@ export function LegalDocument(props: {
         <p className="updated">Last updated: {props.updated}</p>
         {props.children}
       </article>
-      <Footer />
+      <Footer lang={props.lang} />
     </main>
   );
 }

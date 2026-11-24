@@ -430,6 +430,46 @@ day: both moved in with their history, and `seed-archive/ui` and `seed-archive/m
 **Rejected.** A repository per package (three of each setup) and the monorepo of D3 (sites and packages together,
 rejected again in D17): this one holds packages only, which no Vercel project deploys.
 
+## D20. Every page carries its language in its address
+
+**Chosen.** The owner, 2026-11-24: the archive is translated, and every page's address names its language, English
+included. The languages are English, Russian, Spanish and German (`docs/languages.md` has the numbers behind the
+choice). No Man's Sky and Valheim translate first; each game's session translates its own section.
+
+**Where the language sits.**
+- In a game's section right after its slug: `/no-mans-sky/en/guides/…`, `/valheim/de/tools/wind`. The slug stays
+  first, so `basePath` still equals the slug and the portal's routing of `/<slug>/*` does not change (D3).
+- In the portal as the first segment: `/en/release-notes`, `/ru/privacy`.
+- The codes are `en`, `ru`, `es`, `de`.
+
+**What each address answers.**
+
+| Request | Answer |
+|---|---|
+| `/<slug>/<lang>`, `/<lang>` | that section's home, or the portal's, in that language: a page of its own, never a redirect |
+| an address without a language (`/<slug>/guides/…`, `/<slug>`, `/`) | 308 to the same page under `/en/`; always English, never by the browser's language, so one address always answers the same |
+| a page that has no translation in that language yet | 307 to the English page; it is left out of `hreflang` until it is translated |
+| a language the archive does not have (`/<slug>/fr/…`) | 404 |
+
+In the portal an unknown first segment (`/fr`, `/en/nope`) is not answered by the portal itself: it falls to the
+rewrite that hands No Man's Sky's old links to that game (`next.config.ts`, `fallback`), and the game answers it.
+The portal links a game's section with its language only once that game's `localized` is set in `lib/games.ts`,
+after the section's `/en/` addresses are released.
+
+**On every page.** `hreflang` to each of its translations and `x-default` to the English one; a canonical to
+itself, never to the English page; every language's addresses in the sitemap. The visitor's browser language never
+redirects: when it asks for a language the page has, a notice offers that version, and the choice is kept in
+`localStorage`.
+
+**Why.** A page whose language is switched in the browser shows search engines only one language
+(`docs/languages.md`). An English page without a prefix would have saved the move, but the archive is young, so the
+move costs least now, and one rule for every language keeps the code and the analytics simple. The old addresses
+of `atlas-archive-tau.vercel.app` go straight to `/en/`, one redirect, not two.
+
+**Rejected.** A language kept only in `localStorage` (not indexed); English without a prefix (two kinds of
+address forever); the language before the slug (it breaks the zones' routing); a redirect by the browser's
+language (search engines see a different answer for the same address).
+
 ## State on 2026-11-14 and the order of the move
 
 - **A. The release with the domain — done 2026-11-14.** `seedarchive.gg` on the portal, the No Man's Sky site under
