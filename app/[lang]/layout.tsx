@@ -3,7 +3,9 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 
-import "./globals.css";
+import { alternates, type LangProps, pageLang, PUBLISHED } from "@/lib/locales";
+
+import "../globals.css";
 
 const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
@@ -18,17 +20,29 @@ export const metadata: Metadata = {
   title: "Seed Archive — where the best finds of game worlds are",
   description:
     "Game worlds grown from a seed, taken apart: which places hold the best finds, and why. Starting with No Man's Sky.",
-  alternates: { canonical: "/" },
+  alternates: alternates("en", ""),
 };
 
-export default function RootLayout({ children }: PropsWithChildren) {
+// Only the published languages are pages; any other first segment is not one
+// of the portal's (an unpublished language is redirected in next.config.ts).
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return PUBLISHED.map((lang) => ({ lang }));
+}
+
+export default async function RootLayout(
+  props: PropsWithChildren<LangProps>,
+) {
+  const { children } = props;
+  const lang = await pageLang(props);
   return (
-    <html lang="en" className={manrope.variable}>
+    <html lang={lang} className={manrope.variable}>
       <body>
         {/* The header every app of the archive shares (D15): the name leads to
             the portal's root; a game's site adds its own name and menu. */}
         <header className="bar">
-          <a className="brand" href="/">
+          <a className="brand" href={`/${lang}`}>
             Seed Archive
           </a>
         </header>

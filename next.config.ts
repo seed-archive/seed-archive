@@ -2,12 +2,46 @@ import { withSentryConfig } from "@sentry/nextjs/config";
 import type { NextConfig } from "next";
 
 import { GAMES } from "./lib/games";
+import {
+  DEFAULT_LOCALE,
+  LOCALES,
+  PORTAL_PAGES,
+  PUBLISHED,
+} from "./lib/languages";
 
 // The portal's own production alias and its Vercel Analytics path.
 const PORTAL = "https://seed-archive-theta.vercel.app";
 const PORTAL_ANALYTICS = "933b9afd1a52216d";
 
 const nextConfig: NextConfig = {
+  // Every address names its language (docs/architecture.md, D20).
+  async redirects() {
+    return [
+      // A portal page without a language: 308 to the same page in English,
+      // always English, so one address always answers the same.
+      ...PORTAL_PAGES.map((page) => ({
+        source: page || "/",
+        destination: `/${DEFAULT_LOCALE}${page}`,
+        permanent: true,
+      })),
+      // A language of the archive the portal is not published in yet: 307
+      // to the English page, until the translation arrives.
+      ...LOCALES.filter((lang) => !PUBLISHED.includes(lang)).flatMap(
+        (lang) => [
+          {
+            source: `/${lang}`,
+            destination: `/${DEFAULT_LOCALE}`,
+            permanent: false,
+          },
+          {
+            source: `/${lang}/:path+`,
+            destination: `/${DEFAULT_LOCALE}/:path+`,
+            permanent: false,
+          },
+        ],
+      ),
+    ];
+  },
   async rewrites() {
     return {
       // Each game's section is answered by the game's own deployment.
