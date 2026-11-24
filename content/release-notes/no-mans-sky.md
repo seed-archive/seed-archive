@@ -1,4 +1,8 @@
 
+## 24 November 2026: version 1.7
+
+- No Man's Sky now reads in Russian, Spanish and German: pick the language at the top of a page. The menus and the galaxy and system guides are translated first; the other guides follow.
+
 ## 21 November 2026: version 1.4
 
 - Every upgrade module family now says what to buy: whether an A-Class or Illegal module can stand in for S-Class, and how often an Illegal one beats the best S-Class card. See [multitool](/no-mans-sky/guides/multitools/multitool-modules), [starship](/no-mans-sky/guides/ships/starship-modules), [exosuit](/no-mans-sky/guides/exosuit/exosuit-modules), and [freighter](/no-mans-sky/guides/freighters/freighter-technology) modules, and every exocraft from the [Roamer](/no-mans-sky/guides/exocraft/roamer-modules) to the [Minotaur](/no-mans-sky/guides/exocraft/minotaur-modules).

@@ -1,19 +1,23 @@
 import type { Metadata } from "next";
 
 import { Footer } from "@/components/Footer";
+import { alternates, type LangProps, pageLang } from "@/lib/locales";
 
-export const metadata: Metadata = {
-  title: "Credits — Seed Archive",
-  alternates: { canonical: "/credits" },
-  description:
-    "The players whose runs and streams taught Seed Archive what its guides say.",
-};
+export async function generateMetadata(props: LangProps): Promise<Metadata> {
+  return {
+    title: "Credits — Seed Archive",
+    alternates: alternates(await pageLang(props), "/credits"),
+    description:
+      "The players whose runs and streams taught Seed Archive what its guides say.",
+  };
+}
 
 // Thanks of the whole archive, one list, not split by game: a streamer plays
 // many games (the owner, 2026-11-17). Released with Valheim's section.
 // A game's guide links here with a plain <a>. Every link out is nofollow, so
 // the archive's rank does not flow to them (the owner, 2026-11-18).
-export default function CreditsPage() {
+export default async function CreditsPage(props: LangProps) {
+  const lang = await pageLang(props);
   return (
     <main className="page">
       <article className="legal">
@@ -56,7 +60,7 @@ export default function CreditsPage() {
           , for Valheim and RimWorld.
         </p>
       </article>
-      <Footer />
+      <Footer lang={lang} />
     </main>
   );
 }

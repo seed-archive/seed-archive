@@ -11,7 +11,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/no-mans-sky/likes"],
+      // Each reader's own likes (D20: under the page's language).
+      disallow: ["/no-mans-sky/likes", "/no-mans-sky/*/likes"],
     },
     sitemap: [
       `${base}/sitemap.xml`,

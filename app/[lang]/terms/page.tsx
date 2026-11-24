@@ -2,17 +2,25 @@ import type { Metadata } from "next";
 
 import { LegalDocument, LegalSection } from "@/components/Legal";
 import { GAMES } from "@/lib/games";
+import { alternates, type LangProps, pageLang } from "@/lib/locales";
 
-export const metadata: Metadata = {
-  title: "Terms of service — Seed Archive",
-  alternates: { canonical: "/terms" },
-  description:
-    "Seed Archive is an unofficial fan site about game worlds whose information is provided as is.",
-};
+export async function generateMetadata(props: LangProps): Promise<Metadata> {
+  return {
+    title: "Terms of service — Seed Archive",
+    alternates: alternates(await pageLang(props), "/terms"),
+    description:
+      "Seed Archive is an unofficial fan site about game worlds whose information is provided as is.",
+  };
+}
 
-export default function TermsPage() {
+export default async function TermsPage(props: LangProps) {
+  const lang = await pageLang(props);
   return (
-    <LegalDocument title="Terms of service" updated="15 November 2026">
+    <LegalDocument
+      lang={lang}
+      title="Terms of service"
+      updated="15 November 2026"
+    >
       <p>
         By using Seed Archive you accept these terms. If you do not accept them,
         do not use the site.

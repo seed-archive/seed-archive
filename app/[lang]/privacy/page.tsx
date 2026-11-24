@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
 
 import { LegalDocument, LegalSection } from "@/components/Legal";
+import { alternates, type LangProps, pageLang } from "@/lib/locales";
 
-export const metadata: Metadata = {
-  title: "Privacy policy — Seed Archive",
-  alternates: { canonical: "/privacy" },
-  description:
-    "What Seed Archive keeps if you sign in with Google, like a record, or send a bug report.",
-};
+export async function generateMetadata(props: LangProps): Promise<Metadata> {
+  return {
+    title: "Privacy policy — Seed Archive",
+    alternates: alternates(await pageLang(props), "/privacy"),
+    description:
+      "What Seed Archive keeps if you sign in with Google, like a record, or send a bug report.",
+  };
+}
 
-export default function PrivacyPage() {
+export default async function PrivacyPage(props: LangProps) {
+  const lang = await pageLang(props);
   return (
-    <LegalDocument title="Privacy policy" updated="15 November 2026">
+    <LegalDocument
+      lang={lang}
+      title="Privacy policy"
+      updated="15 November 2026"
+    >
       <p>
         Seed Archive and every game&apos;s section of it can be read without an
         account. This policy describes the information the site handles and

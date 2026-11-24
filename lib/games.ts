@@ -22,6 +22,9 @@ export type Game = {
   analytics?: string;
   // Who owns the game, its names and images (the terms of service).
   owner: string;
+  // Whether the section's released addresses name their language
+  // (/<slug>/en/…, D20). Until then the portal links the section without one.
+  localized?: boolean;
 };
 
 export const GAMES: Game[] = [
@@ -36,6 +39,7 @@ export const GAMES: Game[] = [
     cover: "/games/no-mans-sky.jpg",
     analytics: "a1110995d7968c05",
     owner: "Hello Games",
+    localized: true,
   },
   {
     slug: "valheim",
@@ -53,4 +57,15 @@ export const GAMES: Game[] = [
 // with no link and no forwarding. It moves into GAMES on its release.
 export type ComingGame = Pick<Game, "slug" | "name" | "pitch" | "cover" | "owner">;
 
-export const COMING: ComingGame[] = [];
+export const COMING: ComingGame[] = [
+  {
+    slug: "rimworld",
+    name: "RimWorld",
+    pitch: "Planets, biomes and storytellers: where your colony should land.",
+    // The Odyssey key art, Steam's library hero of the game, cropped to 16:9.
+    // Ludeon allows its art only for mods; the owner chose to show it with
+    // credit (2026-11-24).
+    cover: "/games/rimworld.jpg",
+    owner: "Ludeon Studios",
+  },
+];

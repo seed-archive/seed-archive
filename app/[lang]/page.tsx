@@ -1,5 +1,6 @@
 import { Footer } from "@/components/Footer";
 import { COMING, GAMES } from "@/lib/games";
+import { type LangProps, localize, pageLang } from "@/lib/locales";
 import { readReleases, releaseTitle } from "@/lib/releaseNotes";
 
 // How many releases the root page shows; the rest are on /release-notes.
@@ -8,7 +9,8 @@ const LATEST = 3;
 // The root of seedarchive.gg: what the archive is, and a door into each game.
 // A link into a game's section is a plain <a>: the section is another app, so
 // moving into it is a full page load (Next.js Multi-Zones).
-export default async function Home() {
+export default async function Home(props: LangProps) {
+  const lang = await pageLang(props);
   const latest = (await readReleases()).slice(0, LATEST);
   return (
     <main className="page">
@@ -23,7 +25,7 @@ export default async function Home() {
       <ul className="games">
         {GAMES.map((game) => (
           <li key={game.slug}>
-            <a className="game" href={`/${game.slug}`}>
+            <a className="game" href={localize(`/${game.slug}`, lang)}>
               <img className="cover" src={game.cover} alt="" />
               <span className="caption">
                 <span className="name">{game.name}</span>
@@ -56,19 +58,24 @@ export default async function Home() {
         <ul>
           {latest.map((release) => (
             <li key={release.id}>
-              <a href={`/release-notes#${release.id}`}>
+              <a href={`/${lang}/release-notes#${release.id}`}>
                 <span className="title">{releaseTitle(release)}</span>
                 <span className="day">{release.day}</span>
               </a>
             </li>
           ))}
         </ul>
-        <a className="all" href="/release-notes">
+        <a className="all" href={`/${lang}/release-notes`}>
           All release notes <span aria-hidden="true">→</span>
         </a>
       </section>
 
-      <Footer />
+      <p className="support">
+        The archive is free, with no ads.{" "}
+        <a href={`/${lang}/support`}>Support it</a> if it saved you time.
+      </p>
+
+      <Footer lang={lang} />
     </main>
   );
 }
