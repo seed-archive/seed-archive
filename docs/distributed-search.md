@@ -1,8 +1,9 @@
 # Distributed search: visitors compute seeds for the archive
 
 **Status:** draft, 2026-11-27. The owner's idea and two rounds of his decisions the same day; the three games'
-answers are below. The parts marked Open wait on a game session or on the owner. **In development, behind a flag
-and out of releases**: what is built and on which branches is in [work-in-progress.md](work-in-progress.md).
+answers are below. The parts marked Open wait on a game session or on the owner. **Deferred** (the owner,
+2026-11-27): set aside, behind a flag and out of releases; what was built and on which branches is in
+[work-in-progress.md](work-in-progress.md).
 
 **Computing is in the browser** (the owner, 2026-11-27): every portion is computed and confirmed by visitors'
 browsers. The owner's machine is not part of the scheme; what it runs, if anything, is his own business. The server

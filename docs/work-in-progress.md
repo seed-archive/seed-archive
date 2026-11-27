@@ -5,7 +5,8 @@ left. A piece leaves this page when it is released; its design stays in its own 
 
 ## Distributed seed search
 
-**Status (2026-11-27):** in development; **not in any release** (the owner, 2026-11-27). Everything below is on
+**Status (2026-11-27): deferred.** The owner, 2026-11-27: set aside for a long time; nothing more is built until he
+takes it up again, and it is in no release. Everything below is on
 branches, uncommitted, and the portal shows it only behind the flag `NEXT_PUBLIC_COMPUTE=1`, which no Vercel
 environment sets. The design and the contract are in [distributed-search.md](distributed-search.md).
 
