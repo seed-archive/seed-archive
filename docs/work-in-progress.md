@@ -11,8 +11,9 @@ environment sets. The design and the contract are in [distributed-search.md](dis
 
 ### Branches
 
-Each branch is off its repository's `dev`; nothing is committed. Merge order: the points migration first, then
-Valheim's schema, then No Man's Sky's (their timestamps follow that order).
+Each branch holds its work as a WIP commit, local only, not pushed (the owner, 2026-11-27); the main checkouts are
+back on their own branches. In `no-mans-sky-site` the three branches are stacked in merge order: `wip-compute-points`
+on `dev`, `wip-valheim-schema` on it, `wip-nms-search` on that.
 
 | Repository | Branch | Local folder | Owner | What |
 |---|---|---|---|---|
