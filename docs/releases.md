@@ -9,7 +9,7 @@ How work moves from a change to seedarchive.gg, for every repository of the arch
 |---|---|---|---|
 | a game's generator (private) | `main` | the generator itself | its session, on the owner's word |
 | a game's site | `dev` | production (Vercel deploys `main`) | the coordinator, on the owner's word |
-| the portal, `seed-archive` | `dev` | production (deployed from the CLI) | the coordinator, on the owner's word |
+| the portal, `seed-archive` | `dev` | production (Vercel deploys `main`) | the coordinator, on the owner's word |
 | `renovate-config` | `main` | the presets Renovate reads | the coordinator, on the owner's word |
 
 - **Only generators and `renovate-config` commit to `main`.** Neither is deployed, so there is nothing to protect;
@@ -38,8 +38,9 @@ owner's word in the coordinator's own conversation; a session quoting the owner 
 4. **Merge.** A pull request from `dev` to `main`, titled with what a visitor gets; merged with a merge commit, so
    `main` and `dev` keep the same history.
 5. **Deploy.**
-   - A site: Vercel deploys `main` by itself; a site with migrations applies them through its CI on the same push.
-   - The portal: `vercel deploy --prod` from a checkout of `main`, never from `dev` or a branch.
+   - Every app, the portal included, is deployed by Vercel from `main` through its Git link (the portal's since
+     2026-11-24); a site with migrations applies them through its CI on the same push. If a push to `main` is not
+     deployed, `vercel deploy --prod` from a checkout of `main`, never from `dev` or a branch.
 6. **Check on production.** The changed pages answer `200` on seedarchive.gg, old addresses redirect in one hop, the
    release notes show the release, and Sentry shows no new error from the release.
 
@@ -75,3 +76,11 @@ The coordinator gives the number when the release is called, in step 2 below.
   that **receives** goes first: the portal's page is live before the game's site redirects to it.
 - One release, one cause: a database migration that moves tables, a domain change, or a rename goes out alone.
 - The coordinator sets the order when several repositories release at once.
+
+## Opening a new game's section
+
+Beyond a release's usual steps, the coordinator does these for the game's first release (next: RimWorld):
+
+- Add the game's slug to the portal project's routing rule "Zones: drop x-robots-tag" (`vercel routes update`, then
+  `vercel routes publish`), or Vercel's `x-robots-tag: noindex` reaches every page of the section (`seo.md` →
+  Crawling and indexing). After the deploy, `curl -sI` on the section's home shows no `x-robots-tag`.

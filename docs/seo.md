@@ -25,11 +25,23 @@ with a link to this one. The No Man's Sky section's is `docs/seo.md` of its site
 
 - One header for the whole archive (D15): "Seed Archive", a plain link to the domain's root, then the game's name, a
   link to its section's home, then the game's own menu.
-- A game's menu has at most four items, each a visitor's question with the same name in every game: Catalog,
-  Guides, Tools, Quests (D15). More pages go into their dropdowns; on a phone the whole menu is in the drawer; About
+- A game's menu has at most four items, each a visitor's question with the same name in every game: Database,
+  Guides, Tools, Quests (D15; "Database" replaced "Catalog" on the owner's word, 2026-11-24, at `/<slug>/<lang>/database/…`;
+  its Russian label is «Справочник», Spanish «Base de datos», German «Datenbank»; a game whose own table names its
+  database takes the game's word, as Oxygen Not Included's Russian «База данных»). More pages go into their dropdowns; on a phone the whole menu is in the drawer; About
   is in the footer, not the header, and linked once from the lead of the game's home page.
-- A page's address names its menu item: `/<slug>/guides/…`, `/<slug>/tools/<tool>`, `/<slug>/quests/…`, each item
-  with an index page; the catalog's lists stay at `/<slug>/<kind>` (D15).
+- **A page's address follows the menu, level by level** (the owner, 2026-11-24, replacing the catalog's lists at
+  `/<slug>/<kind>` of D15): `/<slug>/<lang>/<menu item>/<group>/<page>`, where `<group>` is there when the menu
+  groups its pages (as the guides' groups) and absent when it does not. Every level is a page of its own, an index of
+  the level below (`/database`, `/database/galaxy`, `/guides/basics`), and the breadcrumbs name every level:
+  Home › Database › Galaxy › the record. No Man's Sky's records live at `/no-mans-sky/<lang>/database/<kind>/<id>`.
+  A move answers 308 from every old address to the new one in one hop, the language kept.
+- **No Man's Sky's translated database is not indexed** (the owner, 2026-11-24): its database is hundreds of record
+  pages with little text, so every page under `/no-mans-sky/<lang>/database/`, its index, lists and records alike, in
+  any language but English, answers `noindex`, is left out of the sitemap and out of the English page's `hreflang`.
+  One function of the site decides it (`indexable(lang, path)`: English, or not under `database`), and the metadata,
+  the sitemap and `hreflang` all ask it. Lifted once the English database is indexed. Every other game's database,
+  pages of tables and advice, stays indexed in every language.
 - A game's footer speaks for its game (D12): its sections, guides, and tools. The legal pages and anything about the
   archive itself belong to the portal's footer.
 - **A full-screen tool keeps the header and drops the rest** (the owner, 2026-11-15; first Valheim's map): the page is
@@ -54,6 +66,13 @@ with a link to this one. The No Man's Sky section's is `docs/seo.md` of its site
   (a game's likes). Each section serves its own `sitemap.xml` under its prefix, with absolute `https://seedarchive.gg/
   <slug>/…` addresses.
 - Every page states its canonical address on seedarchive.gg, whatever host served it.
+- **No `x-robots-tag` from Vercel** (2026-11-27): Vercel adds `x-robots-tag: noindex` to a project's team alias
+  (`<project>-<team>.vercel.app`), which the portal rewrites each zone to, and the rewrite passed it on to
+  seedarchive.gg, so no game page was indexed from 2026-11-14 to 2026-11-27. The portal project holds a
+  Project-Level Routing Rule, "Zones: drop x-robots-tag" (`vercel routes list`), that deletes the header on
+  `^/(no-mans-sky|valheim)(/.*)?$`; a new game's slug is added to its pattern (`vercel routes update`, then
+  `vercel routes publish`). Our own noindex is a meta tag only. After a release, `curl -sI` on one page of each zone
+  shows no `x-robots-tag`.
 - Search Console: one domain property, `seedarchive.gg`, verified by a DNS TXT record in Cloudflare (keep the record);
   each section's sitemap is submitted to it. An old address of a game keeps its own property until Google has moved
   it: "Change of address" from that property to `seedarchive.gg`, once the old host answers every path with a
