@@ -1,3 +1,10 @@
+## 28 November 2026: version 1.8
+
+- [How good is my seed?](/valheim/tools/how-good-is-my-seed): how many Infested Mines you must clear for the nine Sealbreaker fragments and for the five black cores of the Black Forge, and whether a Fuling village stands within 100 m of Yagluth's altar.
+- [Best seeds](/valheim/tools/best-seeds) chosen again for game version 1.0.31: a seed that needs more than three mines for the fragments, or has a Fuling village by Yagluth's altar, is left out.
+- [Creatures](/valheim/database/world/creatures): how far each creature sees and hears you.
+- The guides' numbers recounted for game version 1.0.31.
+
 ## 24 November 2026: version 1.7
 
 - Valheim now reads in Russian, Spanish and German: pick the language at the top of a page.

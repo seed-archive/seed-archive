@@ -18,3 +18,6 @@ terms), and the routing to each game's section.
 - [docs/monitoring.md](docs/monitoring.md) — Sentry and analytics of every app, and how a new game's app joins.
 - [docs/analytics.md](docs/analytics.md) — the choice of counter.
 - [docs/seo.md](docs/seo.md) — the rules of search shared by every section.
+- [docs/work-in-progress.md](docs/work-in-progress.md) — what is built but not released: branches, state, what is left.
+- [docs/distributed-search.md](docs/distributed-search.md) — visitors' browsers computing seeds for the archive (in
+  development).
