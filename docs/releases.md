@@ -61,7 +61,9 @@ The owner, 2026-11-17: a player does not care how the site is built; he cares ab
 One version for the whole archive (the owner, 2026-11-16), since the release notes are one list: every release is
 `Seed Archive <major>.<minor>`, whatever it carries.
 
-- A release raises the minor number: 1.0, 1.1, 1.2. Opening a new game's section is a release like any other and
+- A release raises the minor number: 1.0, 1.1, 1.2. A small release of corrections and updates to what is already
+  there may raise a third number instead, when the owner calls it so (2026-11-28: Valheim's update for game version
+  1.0.31 was 1.7.1). Opening a new game's section is a release like any other and
   does not raise the major (the owner, 2026-11-21: nothing changed enough for 2.0).
 - Sections released together share one number; each writes it in its own file's heading
   (`## 16 November 2026: version 1.1`). Releases the owner calls apart get a number each, even on one day (2026-11-21:
